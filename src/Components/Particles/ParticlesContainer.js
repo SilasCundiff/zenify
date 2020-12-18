@@ -1,36 +1,23 @@
 import React, { Component, createRef } from 'react';
+import { connect } from 'react-redux';
 import songFile from '../../Audio/senseless.mp3';
 import Particles from 'react-tsparticles';
 import particlesOptions from './particles.json';
-// import { logLimiter } from '../../utils/LogLimiter';
-// function debounce(fn, time) {
-//   let timeoutId;
-//   return wrapper;
-//   function wrapper(...args) {
-//     if (timeoutId) {
-//       clearTimeout(timeoutId);
-//     }
-//     timeoutId = setTimeout(() => {
-//       timeoutId = null;
-//       fn(...args);
-//     }, time);
-//   }
-// }
 
-let canvasContext;
+// let canvasContext;
 let speed = 0;
-let tone;
-let h, s, l;
+// let tone;
+// let h, s, l;
 class ParticlesContainer extends Component {
   constructor(props) {
     super(props);
     this.audio = new Audio(songFile);
-    this.canvasRef = createRef();
+    // this.canvasRef = createRef();
     this.containerRef = createRef();
     this.ParticleOptions = particlesOptions;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     this.analyserNode = new AnalyserNode(this.audioCtx, {
       fftSize: 64,
@@ -38,6 +25,9 @@ class ParticlesContainer extends Component {
       maxDecibels: -30,
       minDecibels: -100,
     });
+    if (this.context.state === 'suspended') {
+      await this.context.resume();
+    }
     this.source = this.audioCtx.createMediaElementSource(this.audio);
     this.source.connect(this.analyserNode);
     this.analyserNode.connect(this.audioCtx.destination);
@@ -45,34 +35,32 @@ class ParticlesContainer extends Component {
     this.bufferLength = this.analyserNode.frequencyBinCount;
     this.containerRef.current = this.getContainer(this.containerRef.current);
   }
-  setCanvas(canvas) {
-    let width = (canvas.width = this.canvasRef.current.width);
-    let height = (canvas.height = this.canvasRef.current.height);
-    const barWidth = width / this.bufferLength;
-    canvasContext = canvas.getContext('2d');
-    canvasContext.clearRect(0, 0, width, height);
-    this.freqDataArray.forEach((item, index) => {
-      const y = ((item / 255) * height) / 4;
-      const x = barWidth * index;
-      h = (y / height) * 800;
-      s = '50%';
-      l = '60%';
-      tone = `hsl(${h},${s},${l})`;
-      // console.log('tone', tone);
-      canvasContext.fillStyle = tone;
-      canvasContext.fillRect(x, height - y, barWidth, y);
-    });
-    speed = this.freqDataArray[5];
+  // setCanvas(canvas) {
+  //   // let width = (canvas.width = this.canvasRef.current.width);
+  //   // let height = (canvas.height = this.canvasRef.current.height);
+  //   // const barWidth = width / this.bufferLength;
+  //   // canvasContext = canvas.getContext('2d');
+  //   // canvasContext.clearRect(0, 0, width, height);
+  //   // this.freqDataArray.forEach((item, index) => {
+  //   //   const y = ((item / 255) * height) / 4;
+  //   //   const x = barWidth * index;
+  //   //   h = (y / height) * 800;
+  //   //   s = '50%';
+  //   //   l = '60%';
+  //   //   tone = `hsl(${h},${s},${l})`;
+  //   //   // console.log('tone', tone);
+  //   //   canvasContext.fillStyle = tone;
+  //   //   canvasContext.fillRect(x, height - y, barWidth, y);
+  //   // });
+  //   // console.log('speed', speed);
+  // }
 
-    // console.log('speed', speed);
-  }
-
-  handleResize() {
-    this.canvasRef.current.width =
-      this.canvasRef.current.clientWidth * window.devicePixelRatio;
-    this.canvasRef.current.height =
-      this.canvasRef.current.clientHeight * window.devicePixelRatio;
-  }
+  // handleResize() {
+  //   // this.canvasRef.current.width =
+  //   //   this.canvasRef.current.clientWidth * window.devicePixelRatio;
+  //   // this.canvasRef.current.height =
+  //   //   this.canvasRef.current.clientHeight * window.devicePixelRatio;
+  // }
   getContainer = (container) => {
     // console.clear();
     // console.log(container.options.particles.move.noise);
@@ -110,8 +98,9 @@ class ParticlesContainer extends Component {
   togglePlay = () => {
     const { audio } = this;
     if (audio.paused) {
+      this.audioCtx.resume();
       audio.play();
-      this.handleResize();
+      // this.handleResize();
       this.requestAnimationFrame = requestAnimationFrame(this.tick);
     } else {
       audio.pause();
@@ -121,9 +110,11 @@ class ParticlesContainer extends Component {
   };
 
   tick = () => {
-    this.setCanvas(this.canvasRef.current);
+    // this.setCanvas(this.canvasRef.current);
     this.analyserNode.getByteFrequencyData(this.freqDataArray);
+
     this.requestAnimationFrame = requestAnimationFrame(this.tick);
+    speed = this.freqDataArray[5];
   };
 
   componentWillUnmount() {
@@ -131,6 +122,14 @@ class ParticlesContainer extends Component {
     this.analyserNode.disconnect();
     this.source.disconnect();
   }
+
+  //!REMOVE You dispatch an action which the store uses to call a reducer
+  increment = () => {
+    this.props.dispatch({ type: 'INCREMENT' });
+  };
+  decrement = () => {
+    this.props.dispatch({ type: 'DECREMENT' });
+  };
 
   render() {
     return (
@@ -144,7 +143,7 @@ class ParticlesContainer extends Component {
         >
           Play/Pause
         </button>
-        <canvas
+        {/* <canvas
           style={{
             overflow: 'hidden',
             position: 'absolute',
@@ -157,15 +156,26 @@ class ParticlesContainer extends Component {
             height: '100vh',
           }}
           ref={this.canvasRef}
-        />
+        /> */}
         <Particles
           style={{ zIndex: -100, position: 'relative', pointerEvents: 'none' }}
           container={this.containerRef}
           id='tsparticles'
           options={this.ParticleOptions}
         />
+        <div className='counter'>
+          <h2>Counter</h2>
+          <button onClick={this.decrement}>&ndash;</button>
+          <span className='count'>{this.props.count}</span>
+          <button onClick={this.increment}>+</button>
+        </div>
       </>
     );
   }
 }
-export default ParticlesContainer;
+//!REMOVE to update state, you map state to props, then you can dispatch an action to update the state in your file
+const mapStateToProps = (state) => ({
+  count: state.counterReducer.count,
+});
+//!REMOVE connect(mapStateToProps)() connects this component to state
+export default connect(mapStateToProps)(ParticlesContainer);
