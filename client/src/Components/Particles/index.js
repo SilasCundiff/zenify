@@ -1,6 +1,6 @@
 import React from 'react';
 import ParticlesContainer from './ParticlesContainer';
-const Visualizer = () => {
+const ParticleVisualizer = () => {
   return (
     <>
       <header className='App-header'>
@@ -10,4 +10,4 @@ const Visualizer = () => {
   );
 };
 
-export default Visualizer;
+export default ParticleVisualizer;
