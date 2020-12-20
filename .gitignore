@@ -5,3 +5,4 @@ react-spotify-web-playback-master
 .env.development.local
 .env.test.local
 .env.production.local
+.env
