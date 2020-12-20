@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux';
-
-export default combineReducers({});
+import setToken from './auth';
+export default combineReducers({
+  setToken,
+});
