@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PlayingInfo from './PlayingInfo';
+
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getToken } from '../../actions/auth.js';
@@ -32,12 +32,9 @@ function Authentication({ getToken, isLoggedIn, token }) {
 
   return (
     <div>
-      {!isLoggedIn ? (
-        <a href='http://localhost:8888'>
-          <button>Login to Spotify</button>
-        </a>
-      ) : null}
-      {isLoggedIn && <PlayingInfo token={token} />}
+      <a href='http://localhost:8888'>
+        <button>Login to Spotify</button>
+      </a>
     </div>
   );
 }

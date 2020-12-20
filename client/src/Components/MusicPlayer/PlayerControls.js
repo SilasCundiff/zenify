@@ -1,5 +1,6 @@
 import React from 'react';
 import './PlayerControls.css';
+
 function PlayerControls({ musicInfo }) {
   console.log('musicInfo', musicInfo);
   const backgroundStyles = {

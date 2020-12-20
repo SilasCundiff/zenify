@@ -1,12 +1,22 @@
 import React from 'react';
 import Authentication from './Authentication';
-
-function MusicPlayer() {
+import PlayingInfo from './PlayingInfo';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+function MusicPlayer({ isLoggedIn, token }) {
   return (
     <div>
-      <Authentication />
+      {!isLoggedIn ? <Authentication /> : null}
+      {isLoggedIn && <PlayingInfo token={token} />}
     </div>
   );
 }
-
-export default MusicPlayer;
+MusicPlayer.propTypes = {
+  token: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+};
+const mapStateTopProps = (state) => ({
+  token: state.setToken.accessToken,
+  isLoggedIn: state.setToken.isLoggedIn,
+});
+export default connect(mapStateTopProps)(MusicPlayer);
