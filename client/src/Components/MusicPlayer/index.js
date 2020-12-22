@@ -1,13 +1,13 @@
 import React from 'react';
 import Authentication from './Authentication';
-import PlayingInfo from './PlayingInfo';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Search from './Search';
 function MusicPlayer({ isLoggedIn, token }) {
   return (
     <div>
       {!isLoggedIn ? <Authentication /> : null}
-      {isLoggedIn && <PlayingInfo token={token} />}
+      {isLoggedIn && <Search token={token} />}
     </div>
   );
 }

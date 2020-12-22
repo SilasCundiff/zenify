@@ -12,11 +12,8 @@ const getHashParams = async () => {
   }
   newToken = hashParams.access_token;
 };
-
-// import getHashParams from '../utils/getHashParams';
 export const getToken = () => (dispatch) => {
   getHashParams();
-  console.log('newToken', newToken);
   if (newToken !== null) {
     return dispatch({
       type: SET_ACCESS_TOKEN,
