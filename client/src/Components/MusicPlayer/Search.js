@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { setNowPlaying } from '../../actions/nowPlaying.js';
 import Spotify from 'spotify-web-api-js';
 import SpotifyPlayer from 'react-spotify-web-playback';
 const spotifyWebApi = new Spotify();
 
-function Search({ token }) {
+function Search({ token, setNowPlaying }) {
   const [search, setSearch] = useState('');
   const [tracks, setTracks] = useState();
   const [message, setMessage] = useState('Search for a track');
@@ -22,7 +24,7 @@ function Search({ token }) {
       prev.abort();
     }
 
-    prev = spotifyWebApi.searchTracks(q, { limit: 20 });
+    prev = spotifyWebApi.searchTracks(q, { limit: 10 });
     prev
       .then(
         (data) => {
@@ -67,7 +69,7 @@ function Search({ token }) {
   };
 
   const getNowPlaying = (state) => {
-    console.log('state', state.track.id);
+    setNowPlaying(state.track);
   };
 
   return (
@@ -77,12 +79,13 @@ function Search({ token }) {
         <input
           name='trackSearch'
           type='text'
-          value={search}
+          value={search || ''}
           onChange={handleChange}
         />
       </form>
       {selected.id ? (
         <SpotifyPlayer
+          autoPlay={true}
           styles={{
             activeColor: '#fff',
             bgColor: '#333',
@@ -109,6 +112,7 @@ function Search({ token }) {
                     justifyContent: 'space-around',
                     alignItems: 'center',
                   }}
+                  key={`${track.type}:${track.id}`}
                 >
                   <span
                     onClick={() => {
@@ -152,4 +156,4 @@ function Search({ token }) {
   );
 }
 
-export default Search;
+export default connect(null, { setNowPlaying })(Search);

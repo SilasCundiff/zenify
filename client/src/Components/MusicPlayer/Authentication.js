@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
+
 function Authentication({ getToken }) {
   useEffect(() => {
     /**
@@ -33,7 +33,7 @@ function Authentication({ getToken }) {
     </div>
   );
 }
-
+//TODO
 const mapStateTopProps = (state) => ({
   token: state.setToken.accessToken,
 });
