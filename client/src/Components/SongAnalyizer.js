@@ -4,6 +4,7 @@ import setToken from '../reducers/auth';
 import setNowPlaying from '../reducers/nowPlaying';
 function SongAnalyizer({ token, id }) {
   let prevId = id;
+  let sectionDurations = [];
   useEffect(() => {
     if (id !== null) {
       fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
@@ -18,11 +19,14 @@ function SongAnalyizer({ token, id }) {
         .then((result) => {
           console.log('analysis response', result);
           let sum = 0;
+          sectionDurations = []
           result.sections.forEach((section) => {
+            sectionDurations.push(section.duration);
             sum = sum + section.duration;
           });
           console.log('sum of sections duration', sum);
           console.log('duration', result.track.duration);
+          console.log('sectionDurations', sectionDurations);
         })
         .catch((err) => {
           console.log('err', err);

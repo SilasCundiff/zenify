@@ -21,6 +21,7 @@ export default function setNowPlaying(state = initialState, action) {
         image: payload.image,
         name: payload.name,
         uri: payload.uri,
+        progressMs: payload.progressMs,
       };
     default:
       return state;

@@ -69,7 +69,7 @@ function Search({ token, setNowPlaying }) {
   };
 
   const getNowPlaying = (state) => {
-    setNowPlaying(state.track);
+    setNowPlaying(state);
   };
 
   return (
