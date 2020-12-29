@@ -6,6 +6,7 @@ export const setNowPlaying = (state) => (dispatch) => {
   return dispatch({
     type: SET_CURRENT_SONG,
     payload: {
+      isPlaying: state.isPlaying,
       artists: track.artists,
       durationMs: track.durationMs,
       id: track.id,

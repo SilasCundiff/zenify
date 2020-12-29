@@ -1,6 +1,7 @@
 import { SET_CURRENT_SONG } from '../actions/types';
 
 const initialState = {
+  isPlaying: false,
   artists: '',
   durationMs: 0,
   id: null,
@@ -15,6 +16,7 @@ export default function setNowPlaying(state = initialState, action) {
     case SET_CURRENT_SONG:
       return {
         ...state,
+        isPlaying: payload.isPlaying,
         artists: payload.artists,
         durationMs: payload.durationMs,
         id: payload.id,

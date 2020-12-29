@@ -1,5 +1,5 @@
 import React from 'react';
-// import Particles from './Components/Particles';
+import Particles from './Components/Particles';
 // import Visualizer from './Components/Visualizer';
 import MusicPlayer from './Components/MusicPlayer';
 import SongAnalyizer from './Components/SongAnalyizer';
@@ -12,9 +12,12 @@ export default function App() {
     <Provider store={store}>
       <div className='App'>
         {/* <Visualizer /> */}
-        {/* <Particles /> */}
+
         <MusicPlayer />
         <SongAnalyizer />
+        <Particles
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        />
       </div>
     </Provider>
   );

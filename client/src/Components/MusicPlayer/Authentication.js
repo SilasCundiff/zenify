@@ -33,7 +33,7 @@ function Authentication({ getToken }) {
     </div>
   );
 }
-//TODO
+
 const mapStateTopProps = (state) => ({
   token: state.setToken.accessToken,
 });
