@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import setToken from '../reducers/auth';
 import setNowPlaying from '../reducers/nowPlaying';
-function SongAnalyizer({ token, id }) {
+import { setSongAnalysis } from '../actions/songAnalysis';
+function SongAnalyizer({ token, id, setSongAnalysis }) {
   let prevId = id;
   let sectionDurations = [];
   useEffect(() => {
@@ -17,27 +18,19 @@ function SongAnalyizer({ token, id }) {
       })
         .then((res) => res.json())
         .then((result) => {
-          console.log('analysis response', result);
-          let sum = 0;
-          sectionDurations = []
-          result.sections.forEach((section) => {
-            sectionDurations.push(section.duration);
-            sum = sum + section.duration;
-          });
-          console.log('sum of sections duration', sum);
-          console.log('duration', result.track.duration);
-          console.log('sectionDurations', sectionDurations);
+          // console.log('analysis response', result);
+          setSongAnalysis(result);
         })
         .catch((err) => {
           console.log('err', err);
         });
     }
-  }, [id, token]);
+  }, [id, token, setSongAnalysis]);
 
   return (
     <div style={{ textAlign: 'left' }}>
-      <span>token: {token}</span> <br />
-      <span>song id: {id}</span>
+      {/* <span>token: {token}</span> <br />
+      <span>song id: {id}</span> */}
     </div>
   );
 }
@@ -46,6 +39,8 @@ const mapStateTopProps = (state) => ({
   token: state.setToken.accessToken,
   id: state.setNowPlaying.id,
 });
-export default connect(mapStateTopProps, { setToken, setNowPlaying })(
-  SongAnalyizer
-);
+export default connect(mapStateTopProps, {
+  setToken,
+  setNowPlaying,
+  setSongAnalysis,
+})(SongAnalyizer);
