@@ -41,7 +41,7 @@ function Search({ token, setNowPlaying }) {
         }
       )
       .then((returnedTracks) => {
-        console.log('returnedTracks', returnedTracks);
+        // console.log('returnedTracks', returnedTracks);
         if (returnedTracks.length > 0) {
           setTracks(returnedTracks);
           setMessage('Search for a track');
@@ -65,7 +65,7 @@ function Search({ token, setNowPlaying }) {
       type: `${type}`,
       id: `${id}`,
     });
-    console.log('selected', selected);
+    // console.log('selected', selected);
   };
 
   const getNowPlaying = (state) => {
@@ -98,7 +98,6 @@ function Search({ token, setNowPlaying }) {
           token={token}
           uris={[`spotify:${selected.type}:${selected.id}`]}
           callback={(state) => {
-            console.log('interaction happens', state);
             getNowPlaying(state);
           }}
         />

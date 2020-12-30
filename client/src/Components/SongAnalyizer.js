@@ -5,9 +5,8 @@ import setNowPlaying from '../reducers/nowPlaying';
 import { setSongAnalysis } from '../actions/songAnalysis';
 function SongAnalyizer({ token, id, setSongAnalysis }) {
   let prevId = id;
-  let sectionDurations = [];
   useEffect(() => {
-    if (id !== null) {
+    if (id !== '') {
       fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
         method: 'GET',
         headers: {

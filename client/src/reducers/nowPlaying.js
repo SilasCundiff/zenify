@@ -4,7 +4,7 @@ const initialState = {
   isPlaying: false,
   artists: '',
   durationMs: 0,
-  id: null,
+  id: '',
   image: '',
   name: '',
   uri: '',
