@@ -11,7 +11,8 @@ let songStartTimestamp,
   songEndTimestamp,
   timePassed,
   currentSection,
-  prevSection;
+  prevSection,
+  start;
 
 class ParticlesContainer extends Component {
   constructor(props) {
@@ -21,16 +22,16 @@ class ParticlesContainer extends Component {
     this.isPlaying = this.props.isPlaying;
     this.duration = this.props.duration;
     this.progress = this.props.progress;
-    this.sections = this.props.sections;
+    // this.sections = this.props.sections;
+    // this.segments = this.props.segments;
     this.songStartTimestamp = null;
     this.songEndTimestamp = null;
     this.remainingDuration = this.props.duration - this.props.progress;
   }
 
-  async componentDidMount() {
-    currentSection = await this.props.sections[0];
-    prevSection = currentSection;
-    this.togglePlay();
+  componentDidMount() {
+    this.segments = this.props.segments;
+    currentSection = this.props.segments[0];
     this.containerRef.current = this.getContainer(this.containerRef.current);
   }
 
@@ -39,8 +40,8 @@ class ParticlesContainer extends Component {
     // console.log(container.options.particles.move.noise);
     // console.log(container.setNoise);
     // container.options.particles.move.noise.enable = true;
-    container.options.particles.move.noise.delay.value = 0.1;
-    container.options.particles.move.noise.delay.random.enable = false;
+    container.options.particles.move.noise.delay.value = 0.001;
+    // container.options.particles.move.noise.delay.random.enable = false;
     // container.options.particles.color.animation.sync = true;
 
     // console.log('speed', speed);
@@ -52,13 +53,14 @@ class ParticlesContainer extends Component {
       init: function () {},
       update: function () {},
       generate: function (p) {
-        p.moveSpeed = speed * 2;
+        p.moveSpeed = speed;
+        // console.log('p', p);
         // logLimiter(p.container, false);
         if (!p.noiseAngle) {
           p.noiseAngle = 0;
         }
         p.velocity.horizontal = 0;
-        p.noiseAngle = 1;
+        p.noiseAngle = 0;
         return {
           angle: p.noiseAngle,
           length: 0,
@@ -67,7 +69,9 @@ class ParticlesContainer extends Component {
     });
     return container;
   };
+
   componentDidUpdate() {
+    this.segments = this.props.segments;
     this.isPlaying = this.props.isPlaying;
     this.remainingDuration = this.props.duration - this.props.progress;
     this.duration = this.props.duration;
@@ -85,7 +89,7 @@ class ParticlesContainer extends Component {
     // console.log('this.isPlaying', this.isPlaying);
     // console.log('this.duration', this.duration);
     // console.log('this.progress', this.progress);
-    // console.log('this.sections', this.sections);
+    // console.log('this.segments', this.segments.length);
     // console.log('this.remainingDuration', this.remainingDuration);
     //! end remove
 
@@ -107,21 +111,27 @@ class ParticlesContainer extends Component {
   };
 
   timeKeeper = () => {
+    // console.log('this');
     const date = new Date();
     timePassed = date - songStartTimestamp + this.progress;
-    // localSongSections = this.sections;
-    if (this.sections.length > 0 && timePassed > 0) {
-      for (let i = 0; this.sections.length > i; i++) {
-        if (
-          Math.floor(this.sections[i].start * 1000) < timePassed &&
-          Math.floor(this.sections[i + 1].start * 1000) > timePassed
-        ) {
-          currentSection = this.sections[i];
-          speed = (Math.abs(currentSection.loudness) % 2) * 3;
-          // if (currentSection !== prevSection) {
-          //   prevSection = currentSection;
 
-          // }
+    if (
+      this.props.segments.length > 0 &&
+      timePassed > 0 &&
+      this.props.segments[0].start !== undefined
+    ) {
+      for (let i = 0; this.props.segments.length >= i; i++) {
+        if (i < this.props.segments.length - 1) {
+          if (
+            Math.floor(this.props.segments[i].start * 1000) < timePassed &&
+            Math.floor(this.props.segments[i + 1].start * 1000) > timePassed &&
+            this.props.segments[i] !== currentSection
+          ) {
+            currentSection = this.props.segments[i];
+            let decibels = currentSection.loudness_max + 30;
+            speed = decibels * 0.2;
+            break;
+          }
         }
       }
       // this.sections.forEach((section) => {
@@ -138,6 +148,7 @@ class ParticlesContainer extends Component {
     }
   };
   componentWillUnmount() {
+    this.togglePlay();
     cancelAnimationFrame(this.requestAnimationFrame);
   }
 
@@ -159,6 +170,7 @@ const mapStateTopProps = (state) => ({
   duration: state.setNowPlaying.durationMs,
   progress: state.setNowPlaying.progressMs,
   sections: state.setSongAnalysis.sections,
+  segments: state.setSongAnalysis.segments,
 });
 export default connect(mapStateTopProps, { setNowPlaying, setSongAnalysis })(
   ParticlesContainer

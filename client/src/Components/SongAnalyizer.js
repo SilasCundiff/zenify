@@ -16,9 +16,9 @@ function SongAnalyizer({ token, id, setSongAnalysis }) {
         cache: 'default',
       })
         .then((res) => res.json())
-        .then((result) => {
+        .then(async (result) => {
           // console.log('analysis response', result);
-          setSongAnalysis(result);
+          await setSongAnalysis(result);
         })
         .catch((err) => {
           console.log('err', err);

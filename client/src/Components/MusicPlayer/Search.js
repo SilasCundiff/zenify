@@ -85,7 +85,6 @@ function Search({ token, setNowPlaying }) {
       </form>
       {selected.id ? (
         <SpotifyPlayer
-          autoPlay={true}
           styles={{
             activeColor: '#fff',
             bgColor: '#333',
