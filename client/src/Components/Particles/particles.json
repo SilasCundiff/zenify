@@ -124,7 +124,7 @@
           "quantity": 5,
           "particles": {
             "color": {
-              "value": "#ff0000",
+              "value": "#00ff00",
               "animation": {
                 "enable": true,
                 "speed": 400,
@@ -169,7 +169,7 @@
                 "enable": true,
                 "speed": 5,
                 "minimumValue": 1,
-                "sync": true,
+                "sync": false,
                 "startValue": "min",
                 "destroy": "max"
               },
@@ -269,7 +269,7 @@
         "mode": "bounce"
       },
       "color": {
-        "value": "#f55",
+        "value": "#00ff00",
         "animation": {
           "enable": false,
           "speed": 20,
@@ -364,7 +364,7 @@
           "enable": false,
           "length": 10,
           "fillColor": {
-            "value": "#000000"
+            "value": "#1a1a1a"
           }
         },
         "vibrate": false,
@@ -389,7 +389,7 @@
           "enable": false,
           "minimumValue": 0,
           "speed": 0.5,
-          "sync": true
+          "sync": false
         }
       },
       "reduceDuplicates": false,
@@ -427,7 +427,7 @@
           "enable": true,
           "minimumValue": 1
         },
-        "value": 3,
+        "value": 5,
         "animation": {
           "destroy": "none",
           "enable": true,
