@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import { setNowPlaying } from '../../actions/nowPlaying.js';
 import Spotify from 'spotify-web-api-js';
 import SpotifyPlayer from 'react-spotify-web-playback';
+import './searchStyles.css';
 const spotifyWebApi = new Spotify();
-
 function Search({ token, setNowPlaying }) {
   const [search, setSearch] = useState('');
   const [tracks, setTracks] = useState();
-  const [message, setMessage] = useState('Search for a track');
+  const [message, setMessage] = useState('Enter a Track');
   const [selected, setSelected] = useState({
     type: '',
     id: '',
   });
-
+  const [zen, setZen] = useState(false);
+  const [zenPlayer, setZenPlayer] = useState(false);
   //Taken from Spotify web api example and altered to fit my needs
   spotifyWebApi.setAccessToken(token);
   let prev = null;
@@ -24,7 +25,7 @@ function Search({ token, setNowPlaying }) {
       prev.abort();
     }
 
-    prev = spotifyWebApi.searchTracks(q, { limit: 10 });
+    prev = spotifyWebApi.searchTracks(q, { limit: 20 });
     prev
       .then(
         (data) => {
@@ -44,7 +45,7 @@ function Search({ token, setNowPlaying }) {
         // console.log('returnedTracks', returnedTracks);
         if (returnedTracks.length > 0) {
           setTracks(returnedTracks);
-          setMessage('Search for a track');
+          setMessage('Enter a Track');
         } else {
           setMessage('No Results Found, please try a different track name');
         }
@@ -71,86 +72,120 @@ function Search({ token, setNowPlaying }) {
   const getNowPlaying = (state) => {
     setNowPlaying(state);
   };
+  const handleClick = () => {
+    setZen(!zen);
+  };
+  const handleClick2 = () => {
+    setZenPlayer(!zenPlayer);
+  };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='trackSearch'>{message}</label>
-        <input
-          name='trackSearch'
-          type='text'
-          value={search || ''}
-          onChange={handleChange}
-        />
-      </form>
-      {selected.id ? (
-        <SpotifyPlayer
-          styles={{
-            activeColor: '#fff',
-            bgColor: '#333',
-            color: '#fff',
-            loaderColor: '#fff',
-            sliderColor: '#1cb954',
-            trackArtistColor: '#ccc',
-            trackNameColor: '#fff',
-          }}
-          token={token}
-          uris={[`spotify:${selected.type}:${selected.id}`]}
-          callback={(state) => {
-            getNowPlaying(state);
-          }}
-        />
-      ) : null}
-      <ul>
-        {tracks
-          ? tracks.map((track) => {
-              return (
-                <li
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                  }}
-                  key={`${track.type}:${track.id}`}
-                >
-                  <span
-                    onClick={() => {
-                      handleSelected(track.type, track.id);
-                    }}
-                    style={{ alignSelf: 'left' }}
-                  >
-                    {track.name}
-                  </span>
-                  <span
-                    onClick={() => {
-                      handleSelected(track.album.type, track.album.id);
-                    }}
-                    style={{ alignSelf: 'left' }}
-                  >
-                    {track.album.name}
-                  </span>
-                  <span
-                    onClick={() => {
-                      handleSelected(
-                        track.artists[0].type,
-                        track.artists[0].id
-                      );
-                    }}
-                    style={{ alignSelf: 'left' }}
-                  >
-                    {track.artists[0].name}
-                  </span>
-                  <span>
-                    <img
-                      src={track.album.images[2].url}
-                      alt={`${track.album.name}`}
-                    />
-                  </span>
-                </li>
-              );
-            })
-          : null}
-      </ul>
+      <div className='buttonContainer'>
+        <button
+          className={`ZenModePlayer ${zenPlayer ? 'zen' : 'nozen'}`}
+          id='ZenPlayerButton'
+          onClick={handleClick2}
+        >
+          Zenify Player
+        </button>
+        <button
+          id='ZenButton'
+          className={`ZenMode ${zen ? 'zen' : 'nozen'}`}
+          onClick={handleClick}
+        >
+          Zenify Search
+        </button>
+      </div>
+      <div className={`spotifyBody ${zen ? 'zen' : 'nozen'}`}>
+        <div className='Search'>
+          <form className='SearchForm show' onSubmit={handleSubmit}>
+            <label htmlFor='trackSearch'>{message}</label>
+            <input
+              name='trackSearch'
+              type='text'
+              value={search || ''}
+              onChange={handleChange}
+            />
+          </form>
+        </div>
+
+        <div className={`searchResultsTable ${tracks ? 'show' : 'hide'}`}>
+          <table>
+            {tracks ? (
+              <thead>
+                <tr>
+                  <th>Album cover</th>
+                  <th>Track Name</th>
+                  <th>Album</th>
+                  <th>Artist</th>
+                </tr>
+              </thead>
+            ) : null}
+
+            {tracks ? (
+              <tbody>
+                {tracks.map((track) => {
+                  return (
+                    <tr key={`${track.type}:${track.id}`}>
+                      <td>
+                        <img
+                          className='searchResultAlbumImage'
+                          src={track.album.images[2].url}
+                          alt={`${track.album.name}`}
+                        />
+                      </td>
+                      <td
+                        onClick={() => {
+                          handleSelected(track.type, track.id);
+                        }}
+                      >
+                        {track.name}
+                      </td>
+                      <td
+                        onClick={() => {
+                          handleSelected(track.album.type, track.album.id);
+                        }}
+                      >
+                        {track.album.name}
+                      </td>
+                      <td
+                        onClick={() => {
+                          handleSelected(
+                            track.artists[0].type,
+                            track.artists[0].id
+                          );
+                        }}
+                      >
+                        {track.artists[0].name}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            ) : null}
+          </table>
+        </div>
+      </div>
+      <div className={`Player ${zenPlayer ? 'zen' : 'nozen'}`}>
+        {selected.id ? (
+          <SpotifyPlayer
+            styles={{
+              bgColor: '#191414',
+              color: '#fff',
+              loaderColor: '#1DB954',
+              sliderColor: '#1DB954',
+              trackArtistColor: '#1DB954',
+              trackNameColor: '#1DB954',
+            }}
+            token={token}
+            uris={[`spotify:${selected.type}:${selected.id}`]}
+            callback={(state) => {
+              getNowPlaying(state);
+            }}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }

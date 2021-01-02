@@ -28,7 +28,20 @@ function Authentication({ getToken }) {
   return (
     <div>
       <a href='http://localhost:8888'>
-        <button>Login to Spotify</button>
+        <button
+          style={{
+            position: 'relative',
+            padding: '10px',
+            borderRadius: '5%',
+            margin: '20px 10px 20px 20px',
+            background: '#1DB954',
+            color: '#fff',
+            border: 'none',
+            transition: 'all .5s cubic-bezier(1, 0, 0, 1)',
+          }}
+        >
+          Spotify Login Required to play Music
+        </button>
       </a>
     </div>
   );

@@ -40,7 +40,7 @@ class ParticlesContainer extends Component {
   }
 
   getContainer = (container) => {
-    container.options.particles.move.noise.delay.value = 0.5;
+    container.options.particles.move.noise.delay.value = 0.05;
     container.options.particles.move.noise.delay.random.enable = true;
 
     container.setNoise({
@@ -113,8 +113,7 @@ class ParticlesContainer extends Component {
             let flatness = currentSegment.timbre[2];
             colorS = flatness * 10;
             colorH = color * 3;
-
-            speed = decibels * 0.05;
+            speed = decibels * 0.1;
             break;
           }
         }

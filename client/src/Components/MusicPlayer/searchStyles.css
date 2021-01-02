@@ -1,0 +1,131 @@
+.buttonContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    /* background-color: ivory; */
+    text-align: left;
+}
+.ZenMode, .ZenModePlayer {
+    position: relative;
+    padding: 10px;
+    border-radius: 5%;
+    margin: 20px 10px 20px 20px;
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    transition: all .5s cubic-bezier(1, 0, 0, 1);
+}
+.buttonContainer:hover #ZenButton, .buttonContainer:hover #ZenPlayerButton {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: initial;
+}
+.ZenModePlayer {
+    left: 6%;
+}
+.Search {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(25, 20, 20, 1);
+    position: fixed;
+    top: 0;
+    z-index: 5;
+}
+.Search label {
+    color: #1DB954;
+    font-size: 2rem;
+    margin: 0 20px 0;
+}
+.Search input {
+    font-size: 1.5rem;
+    border-radius: 5px;
+    background-color: #191414;
+    border-color: #1DB954;
+    border: 1px solid #1DB954;
+    color: #1DB954;
+}
+
+.searchResultsTable {
+    position: fixed;
+    text-align: left;
+    padding: 0;
+    margin: 80px 0;
+    width: 100%;
+    height: 100vh;
+    scrollbar-width: thin;         
+    scrollbar-color: #1DB954 #191414;
+    background-color: #191414;
+    overflow-y: auto;
+    transition: all .5s cubic-bezier(1, 0, 0, 1);
+}
+.searchResultsTable::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  .searchResultsTable::-webkit-scrollbar-track {
+    background: #191414;        /* color of the tracking area */
+  }
+  
+  .searchResultsTable::-webkit-scrollbar-thumb {
+    background-color: #1DB954;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #191414;  /* creates padding around scroll thumb */
+  }
+  .searchResultsTable table {
+      width: 100%;
+  }
+.searchResultsTable thead  th{
+    position: sticky;
+    top: 0;
+    font-size: 2rem;
+    border-bottom: 2px solid #1DB954;
+    background-color: #191414;
+    height: 48px;
+}
+
+.searchResultsTable td {
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #1DB954;
+    font-size: 2rem;
+}
+.searchResultAlbumImage {
+    width: 100px;
+}
+.Player {
+    position: fixed;
+    bottom: 0;
+    transition: all 2s;
+    width: 100%;
+}
+
+.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100vw);
+}
+.show {
+    opacity: 1;
+    pointer-events: initial;
+    transform: translateX(0);
+}
+.zen,  .zenPlay {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+.nozen,  .nozenPlay {
+    opacity: 1;
+    pointer-events: initial;
+    visibility: visible;
+}
+
+.spotifyBody {
+    transition: all 2s;
+}
+
