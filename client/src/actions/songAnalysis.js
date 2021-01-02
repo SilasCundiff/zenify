@@ -1,7 +1,7 @@
 import { SET_SONG_ANALYSIS } from './types';
 
 export const setSongAnalysis = (state) => (dispatch) => {
-  console.log('newSonganalysis', state);
+  // console.log('newSonganalysis', state);
   return dispatch({
     type: SET_SONG_ANALYSIS,
     payload: {

@@ -13,13 +13,13 @@ let opacity = 0.8;
 let vertical = 0;
 let horizontal = 0;
 let songStartTimestamp,
-  songEndTimestamp,
+  // songEndTimestamp,
   timePassed,
-  currentSegment,
-  currentSection,
-  currentBar,
-  currentBeat,
-  currentTatum;
+  currentSegment;
+// currentSection,
+// currentBar,
+// currentBeat,
+// currentTatum;
 
 class ParticlesContainer extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class ParticlesContainer extends Component {
   componentDidMount() {
     this.segments = this.props.segments;
     currentSegment = this.props.segments[0];
-    currentBeat = this.props.beats[0];
+    // currentBeat = this.props.beats[0];
     this.containerRef.current = this.getContainer(this.containerRef.current);
   }
 
@@ -57,7 +57,7 @@ class ParticlesContainer extends Component {
           p.noiseAngle = 0;
         }
         p.velocity.horizontal = horizontal;
-        p.velocity.vertical = vertical;
+        // p.velocity.vertical = vertical; //Not sure if I want to use this yet, makes the particles feel more mechanical and the latency more noticeable
         // console.log('p.velocity', p.velocity)
         p.noiseAngle = dance;
         return {
@@ -108,7 +108,8 @@ class ParticlesContainer extends Component {
     if (
       this.props.segments.length > 0 &&
       timePassed > 0 &&
-      this.props.segments[0].start !== undefined
+      this.props.segments[0].start !== undefined &&
+      this.props.isPlaying
     ) {
       for (let i = 0; this.props.segments.length >= i; i++) {
         if (i < this.props.segments.length - 1) {

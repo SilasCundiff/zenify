@@ -172,7 +172,7 @@ function Search({ token, setNowPlaying }) {
           <SpotifyPlayer
             styles={{
               bgColor: '#191414',
-              color: '#fff',
+              color: '#1DB954',
               loaderColor: '#1DB954',
               sliderColor: '#1DB954',
               trackArtistColor: '#1DB954',
