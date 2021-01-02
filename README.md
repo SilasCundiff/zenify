@@ -1,4 +1,4 @@
-#This is Zenify //Link will go here once it is deployed and hosted
+# This is Zenify //Link will go here once it is deployed and hosted
 
 Zenify is a music player and visualizer using Spotify's API, TSParticles, and various supporting libraries.
 
@@ -11,18 +11,20 @@ https://github.com/matteobruni/tsparticles
 https://github.com/gilbarbara/react-spotify-web-playback
 https://github.com/spotify/web-api-auth-examples
 
-Don't know what music to try out off the top of your head?
 
-####OSTs:
+
+Don't know what music to try out off the top of your head?
+Some recommendations: (Don't judge my taste in music to harshly)
+#### OSTs:
 Gareth coker - The entire ori and the will of the wisps soundtrack
 Howard Shore - Lord of the rings - The Bridge of Khazad Dum
 
-####Intrumental metal/progressive:
+#### Intrumental metal/progressive:
 RichardEB - Megalovania, or Ash - from the ablum ash and blood
 Andromida - Dystopia Foretold, Supernova, or Celestial
 Polyphia - Death Note, G.O.A.T, or The Worst
 
-####EDM/Chill
+#### EDM/Chill
 MUZZ - worth the lie
 Seven Lions - only now feat tyler graves - mitix remix
 ILLENIUM - Lonely (with Chandler Leighton)
@@ -40,7 +42,7 @@ The solution I came up with was to use a Date() object to create timestamps for 
 
 I want to revisit this in the future, when I know more, to make improvements, and to make my code more efficient. For instance, I don't use many components, and some components are redundant or should be pure JS code instead, but my lack of experience prevents me from efficiently refactoring things into a cleaner structure.
 
-####Wishlist of features I want to/Will add:
+#### Wishlist of features I want to/Will add:
 *Responsiveness
 *Persistent Sessions and login support/cookies
 *Refresh token support
