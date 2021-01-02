@@ -7,13 +7,13 @@ function Footer() {
     <div>
       <div className='footerTextContainer'>
         <div className='linkContainer'>
-          <a href='#'>
+          <a href='https://github.com/SilasCundiff/zenify'>
             <i class='fab fa-github-square'></i>
           </a>
-          <a href='#'>
+          <a href='https://developer.spotify.com/documentation/web-api/'>
             <i class='fab fa-spotify'></i>
           </a>
-          <a href='#'>
+          <a href='https://silas-cundiff.dev/'>
             <img src={icon} alt='Silvanus Designs' className='footerLogoIcon' />
           </a>
         </div>

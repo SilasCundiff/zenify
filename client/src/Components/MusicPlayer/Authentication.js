@@ -35,9 +35,7 @@ function Authentication({ getToken }) {
       </div>
       <img src={logo} alt='Silvanus Designs' className='introLogo' />
       <a href='http://localhost:8888'>
-        <button className='loginButton'>
-          Spotify Login Required to play Music
-        </button>
+        <button className='loginButton'>Spotify Login Required</button>
       </a>
     </div>
   );

@@ -9,31 +9,38 @@
     top: 0;
     left: 0;
     font-size: 1.5rem;
+    z-index: 100;
 }
 .introLogo {
     position: fixed;
-    top: 50%;
+    top: 60%;
     left: 50%;
-    width: auto;
+    width: 100vw;
     height: 120vh;
     transform: translate(-50%, -50%);
+    backdrop-filter: blur(.3rem);
+
 }
 .introTitle {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 10vw;
+    font-size: 12vw;
     width: 100%;
     color: #1DB954;
     z-index: 1;
     font-family: 'Audiowide', cursive;
+    line-height: 1.6;
+    text-shadow: 10px 3px 0px rgba(255, 255, 255, 0.9);
 }
 .introName {
-    font-size: 4vw;
-
+    font-size: 5vw;
+    color: #1DB954;
+    text-shadow: 3px 5px 3px rgba(0, 0, 0, 0.9);
     font-family: 'Texturina', serif;
     font-weight: 700;
+    
 }
 .fab {
     font-size: 50px;
