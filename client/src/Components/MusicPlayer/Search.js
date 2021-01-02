@@ -4,6 +4,7 @@ import { setNowPlaying } from '../../actions/nowPlaying.js';
 import Spotify from 'spotify-web-api-js';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import './searchStyles.css';
+import Footer from './Footer';
 const spotifyWebApi = new Spotify();
 function Search({ token, setNowPlaying }) {
   const [search, setSearch] = useState('');
@@ -81,6 +82,7 @@ function Search({ token, setNowPlaying }) {
 
   return (
     <div>
+      <Footer />
       <div className='buttonContainer'>
         <button
           className={`ZenModePlayer ${zenPlayer ? 'zen' : 'nozen'}`}

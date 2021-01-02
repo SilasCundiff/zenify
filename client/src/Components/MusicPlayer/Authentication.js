@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
-
+import logo from '../logo.svg';
+import './authenticationStyles.css';
 function Authentication({ getToken }) {
   useEffect(() => {
     /**
@@ -26,20 +27,15 @@ function Authentication({ getToken }) {
   }, [getToken]);
 
   return (
-    <div>
+    <div className='authenticationBody'>
+      <div className='introTitle'>
+        Zenify
+        <br />
+        <span className='introName'> By Silvanus Designs </span>
+      </div>
+      <img src={logo} alt='Silvanus Designs' className='introLogo' />
       <a href='http://localhost:8888'>
-        <button
-          style={{
-            position: 'relative',
-            padding: '10px',
-            borderRadius: '5%',
-            margin: '20px 10px 20px 20px',
-            background: '#1DB954',
-            color: '#fff',
-            border: 'none',
-            transition: 'all .5s cubic-bezier(1, 0, 0, 1)',
-          }}
-        >
+        <button className='loginButton'>
           Spotify Login Required to play Music
         </button>
       </a>
