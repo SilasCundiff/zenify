@@ -1,0 +1,24 @@
+.footerTextContainer {
+    /* background-color: white; */
+    position: fixed;
+    z-index: 100;
+    right: 0;
+    bottom: 0;
+    color: #1DB954;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    font-size: 1.4rem;
+
+}
+ .spotifySpan, .reactSpan, .footer {
+    padding-bottom: 20px;
+}
+.linkContainer {
+    margin-bottom: -1rem;
+}
+.footerLogo {
+    height: 8vh;
+}
