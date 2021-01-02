@@ -10,6 +10,8 @@ let colorH = 141;
 let colorS = 73;
 let dance = 0;
 let opacity = 0.8;
+let verticle = 0;
+let horizontal = 0;
 let songStartTimestamp,
   songEndTimestamp,
   timePassed,
@@ -40,7 +42,7 @@ class ParticlesContainer extends Component {
   }
 
   getContainer = (container) => {
-    container.options.particles.move.noise.delay.value = 0.05;
+    container.options.particles.move.noise.delay.value = 0.25;
     container.options.particles.move.noise.delay.random.enable = true;
 
     container.setNoise({
@@ -54,11 +56,12 @@ class ParticlesContainer extends Component {
         if (!p.noiseAngle) {
           p.noiseAngle = 0;
         }
-        p.velocity.horizontal = dance;
-        p.noiseAngle = 0;
+        p.velocity.horizontal = horizontal;
+        p.velocity.verticle = verticle;
+        p.noiseAngle = dance;
         return {
           angle: p.noiseAngle,
-          length: 0,
+          length: 0.2,
         };
       },
     });
@@ -82,6 +85,12 @@ class ParticlesContainer extends Component {
       this.requestAnimationFrame = requestAnimationFrame(this.tick);
     } else {
       speed = 1;
+      colorH = 141;
+      colorS = 73;
+      dance = 0;
+      opacity = 0.8;
+      verticle = 0;
+      horizontal = 0;
       cancelAnimationFrame(this.requestAnimationFrame);
     }
   };
@@ -111,9 +120,33 @@ class ParticlesContainer extends Component {
             let decibels = currentSegment.loudness_start + 60;
             let color = currentSegment.timbre[0];
             let flatness = currentSegment.timbre[2];
+            let brightness = currentSegment.timbre[1];
+            let attack = currentSegment.timbre[3];
+            let mids = currentSegment.timbre[5];
+
+            speed = decibels * 0.2;
             colorS = flatness * 10;
-            colorH = color * 3;
-            speed = decibels * 0.1;
+            if (colorS > 90) {
+              colorS = 90;
+            } else if (colorS < 50) {
+              colorS = 50;
+            }
+            colorH = (color * speed) / 1.5;
+            // console.log('colorH', colorH);
+            // if (colorH > 360) {
+            //   colorH = 360;
+            // } else if (colorH < 0) {
+            //   colorH = 0;
+            // }
+            verticle = attack % speed;
+            if (i % 20 === 0) {
+              // horizontal = -mids % speed;
+              dance = brightness / 2 - mids;
+            } else {
+              dance = brightness * 2 + mids;
+              // horizontal = mids % speed;
+            }
+
             break;
           }
         }
