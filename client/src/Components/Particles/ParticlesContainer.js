@@ -143,7 +143,7 @@ class ParticlesContainer extends Component {
             if (isNaN(vertical)) {
               vertical = 0;
             }
-            console.log('vertical', vertical);
+            // console.log('vertical', vertical);
             if (i % 20 === 0) {
               // horizontal = -mids % speed;
               dance = brightness / 2 - mids;
