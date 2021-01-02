@@ -10,7 +10,7 @@ let colorH = 141;
 let colorS = 73;
 let dance = 0;
 let opacity = 0.8;
-let verticle = 0;
+let vertical = 0;
 let horizontal = 0;
 let songStartTimestamp,
   songEndTimestamp,
@@ -57,7 +57,8 @@ class ParticlesContainer extends Component {
           p.noiseAngle = 0;
         }
         p.velocity.horizontal = horizontal;
-        p.velocity.verticle = verticle;
+        p.velocity.vertical = vertical;
+        // console.log('p.velocity', p.velocity)
         p.noiseAngle = dance;
         return {
           angle: p.noiseAngle,
@@ -89,7 +90,7 @@ class ParticlesContainer extends Component {
       colorS = 73;
       dance = 0;
       opacity = 0.8;
-      verticle = 0;
+      vertical = 0;
       horizontal = 0;
       cancelAnimationFrame(this.requestAnimationFrame);
     }
@@ -138,7 +139,11 @@ class ParticlesContainer extends Component {
             // } else if (colorH < 0) {
             //   colorH = 0;
             // }
-            verticle = attack % speed;
+            vertical = ((attack % speed) / 2) % 2;
+            if (isNaN(vertical)) {
+              vertical = 0;
+            }
+            console.log('vertical', vertical);
             if (i % 20 === 0) {
               // horizontal = -mids % speed;
               dance = brightness / 2 - mids;
