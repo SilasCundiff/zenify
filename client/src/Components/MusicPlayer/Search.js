@@ -16,6 +16,8 @@ function Search({ token, setNowPlaying }) {
   });
   const [zen, setZen] = useState(false);
   const [zenPlayer, setZenPlayer] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [playerOpen, setPlayerOpen] = useState(false);
   //Taken from Spotify web api example and altered to fit my needs
   spotifyWebApi.setAccessToken(token);
   let prev = null;
@@ -59,7 +61,10 @@ function Search({ token, setNowPlaying }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSearch(e.target.value);
-    await onUserSubmit(search);
+    setSearchOpen(true);
+    if (search) {
+      await onUserSubmit(search);
+    }
   };
   const handleSelected = (type, id) => {
     setSelected({
@@ -67,6 +72,7 @@ function Search({ token, setNowPlaying }) {
       type: `${type}`,
       id: `${id}`,
     });
+    setPlayerOpen(true);
     // console.log('selected', selected);
   };
 
@@ -82,7 +88,6 @@ function Search({ token, setNowPlaying }) {
 
   return (
     <div>
-      <Footer />
       <div className='buttonContainer'>
         <button
           className={`ZenModePlayer ${zenPlayer ? 'zen' : 'nozen'}`}
@@ -188,6 +193,7 @@ function Search({ token, setNowPlaying }) {
           />
         ) : null}
       </div>
+      {!zen ? <Footer /> : null}
     </div>
   );
 }

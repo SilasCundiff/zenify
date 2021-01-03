@@ -1,17 +1,17 @@
 .footerTextContainer {
     /* background-color: white; */
     position: fixed;
-    z-index: 100;
+    z-index: 1;
     right: 0;
     bottom: 0;
     color: #1DB954;
-    height: 10vh;
+    height: 8vh;
     width: 100vw;
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
     font-size: 1.4rem;
-
+    background-color: #191414;
 }
  .spotifySpan, .reactSpan, .footer {
     padding-bottom: 20px;

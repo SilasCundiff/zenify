@@ -58,6 +58,7 @@
     margin: 80px 0;
     width: 100%;
     height: 100vh;
+    z-index: 1;
     scrollbar-width: thin;         
     scrollbar-color: #1DB954 #191414;
     background-color: #191414;
@@ -97,6 +98,7 @@
     height: 48px;
     text-align: center;
     font-weight: 500;
+    z-index: 10;
 }
 
 .searchResultsTable td {
@@ -114,6 +116,9 @@
     bottom: 0;
     transition: all 2s;
     width: 100%;
+    z-index: 100;
+    height: 8vh;
+    background-color: #191414;
 }
 
 .hide {
@@ -141,3 +146,26 @@
     transition: all 2s;
 }
 
+.fab {
+    font-size: 50px;
+    margin: 0 25px;
+}
+.footerLogoIcon {
+    height: 90px;
+}
+.linkContainer {
+    display: flex;
+    align-items: center;
+}
+.linkContainer a {
+    text-decoration: none;
+    color: #1DB954;
+}
+.footerLogo {
+    position: fixed;
+    top: -1%;
+    right: 1%;
+    z-index: 100;
+    padding: 0;
+    margin: 0;
+}
