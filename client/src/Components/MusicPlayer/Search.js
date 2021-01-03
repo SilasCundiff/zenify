@@ -16,8 +16,7 @@ function Search({ token, setNowPlaying }) {
   });
   const [zen, setZen] = useState(false);
   const [zenPlayer, setZenPlayer] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [playerOpen, setPlayerOpen] = useState(false);
+
   //Taken from Spotify web api example and altered to fit my needs
   spotifyWebApi.setAccessToken(token);
   let prev = null;
@@ -61,7 +60,7 @@ function Search({ token, setNowPlaying }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSearch(e.target.value);
-    setSearchOpen(true);
+
     if (search) {
       await onUserSubmit(search);
     }
@@ -72,7 +71,7 @@ function Search({ token, setNowPlaying }) {
       type: `${type}`,
       id: `${id}`,
     });
-    setPlayerOpen(true);
+
     // console.log('selected', selected);
   };
 
