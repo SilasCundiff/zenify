@@ -54,7 +54,7 @@ var stateKey = 'spotify_auth_state';
 var app = express();
 
 app
-  .use(express.static(__dirname + 'client/build/public'))
+  .use(express.static(__dirname + '/public'))
   .use(cors())
   .use(cookieParser());
 
@@ -127,7 +127,7 @@ app.get('/callback', function (req, res) {
 
         // we can also pass the token to the browser to make requests from there
         res.redirect(
-          'https://zenify-server.herokuapp.com/test' +
+          'https://zenify-server.herokuapp.com/' +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token,
