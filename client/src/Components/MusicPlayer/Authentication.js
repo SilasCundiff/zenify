@@ -4,14 +4,14 @@ import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
-function Authentication({ getToken, token }) {
+function Authentication({ getToken, token, isLoggedIn }) {
   useEffect(() => {
     /**
      * Obtains parameters from the hash of the URL
      * @return Object
      */
     const getHashParams = () => {
-      if (!token) {
+      if (token === undefined && isLoggedIn === false) {
         var hashParams = {};
         var e,
           r = /([^&;=]+)=?([^&;]*)/g,
@@ -26,7 +26,7 @@ function Authentication({ getToken, token }) {
       }
     };
     getHashParams();
-  }, [getToken, token]);
+  }, [getToken, token, isLoggedIn]);
 
   return (
     <div className='authenticationBody'>
@@ -45,6 +45,7 @@ function Authentication({ getToken, token }) {
 
 const mapStateTopProps = (state) => ({
   token: state.setToken.accessToken,
+  isLoggedIn: state.setToken.isLoggedIn,
 });
 export default connect(mapStateTopProps, { getToken, setToken })(
   Authentication
