@@ -34,7 +34,7 @@ function Authentication({ getToken }) {
         <span className='introName'> By Silvanus Designs </span>
       </div>
       <img src={logo} alt='Silvanus Designs' className='introLogo' />
-      <a href='http://localhost:8888'>
+      <a href='https://zenify-server.herokuapp.com/loginpage'>
         <button className='loginButton'>Spotify Login Required</button>
       </a>
     </div>
