@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLocation } from 'react';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
 function Authentication({ getToken }) {
+  const location = useLocation();
   useEffect(() => {
     /**
      * Obtains parameters from the hash of the URL
@@ -27,9 +28,9 @@ function Authentication({ getToken }) {
   }, [getToken]);
 
   let success = false;
-  const handleLogin = () => {
-    while (!success) {
-      getHashParams();
+  const handleLogin = async () => {
+    if (location !== '/') {
+      await getHashParams();
     }
   };
 
