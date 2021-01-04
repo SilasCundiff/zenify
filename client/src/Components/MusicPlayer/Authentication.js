@@ -5,47 +5,11 @@ import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
 function Authentication({ getToken }) {
-  useEffect(() => {
-    /**
-     * Obtains parameters from the hash of the URL
-     * @return Object
-     */
-    const getHashParams = async () => {
-      var hashParams = {};
-      var e,
-        r = /([^&;=]+)=?([^&;]*)/g,
-        q = window.location.hash.substring(1);
-      while ((e = r.exec(q))) {
-        hashParams[e[1]] = decodeURIComponent(e[2]);
-      }
-      let hash = await hashParams.access_token;
-      if (hash) {
-        await getToken();
-      }
-    };
-    getHashParams();
-  }, [getToken]);
 
-  /**
-   * Obtains parameters from the hash of the URL
-   * @return Object
-   */
-  const getHashParams = async () => {
-    var hashParams = {};
-    var e,
-      r = /([^&;=]+)=?([^&;]*)/g,
-      q = window.location.hash.substring(1);
-    while ((e = r.exec(q))) {
-      hashParams[e[1]] = decodeURIComponent(e[2]);
-    }
-    let hash = await hashParams.access_token;
-    if (hash) {
-      await getToken();
-    }
-  };
   const handleClick = () => {
     setTimeout(() => {
-      getHashParams();
+      getToken();
+      console.log('this happened');
     }, 2000);
   };
   return (
