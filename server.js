@@ -127,7 +127,7 @@ app.get('/callback', function (req, res) {
 
         // we can also pass the token to the browser to make requests from there
         res.redirect(
-          'https://zenify-server.herokuapp.com/' +
+          'https://zenify-server.herokuapp.com/zenify.html' +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token,
@@ -174,7 +174,7 @@ app.get('/refresh_token', function (req, res) {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'zenify.html'));
   });
 }
 
