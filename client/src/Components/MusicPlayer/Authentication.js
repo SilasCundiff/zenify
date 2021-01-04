@@ -5,15 +5,10 @@ import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
 function Authentication({ getToken }) {
-  const [location, setlocation] = useState('/');
   const newLocation = useLocation();
 
   useEffect(() => {
-    setlocation(newLocation);
-  }, [location, newLocation]);
-
-  useEffect(() => {
-    if (location !== '/') {
+    if (newLocation !== '/') {
       /**
        * Obtains parameters from the hash of the URL
        * @return Object
@@ -33,7 +28,7 @@ function Authentication({ getToken }) {
       };
       getHashParams();
     }
-  }, [getToken, location]);
+  }, [getToken, newLocation]);
 
   return (
     <div className='authenticationBody'>
