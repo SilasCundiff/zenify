@@ -2,7 +2,7 @@ import { SET_ACCESS_TOKEN } from './types';
 
 let newToken;
 
-const getHashParams = async () => {
+const getHashParams = () => {
   var hashParams = {};
   var e,
     r = /([^&;=]+)=?([^&;]*)/g,
@@ -24,4 +24,3 @@ export const getToken = () => (dispatch) => {
     });
   }
 };
-

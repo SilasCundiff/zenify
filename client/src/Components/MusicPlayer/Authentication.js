@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLocation, useState } from 'react';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
-function Authentication({ getToken, token, isLoggedIn }) {
+function Authentication({ getToken }) {
+  const [location, setlocation] = useState(useLocation());
   useEffect(() => {
-    /**
-     * Obtains parameters from the hash of the URL
-     * @return Object
-     */
-    const getHashParams = () => {
-      if (token === undefined && isLoggedIn === false) {
+    if (location !== '/') {
+      /**
+       * Obtains parameters from the hash of the URL
+       * @return Object
+       */
+      const getHashParams = () => {
         var hashParams = {};
         var e,
           r = /([^&;=]+)=?([^&;]*)/g,
@@ -23,10 +24,10 @@ function Authentication({ getToken, token, isLoggedIn }) {
         if (hash) {
           getToken();
         }
-      }
-    };
-    getHashParams();
-  }, [getToken, token, isLoggedIn]);
+      };
+      getHashParams();
+    }
+  }, [getToken, location]);
 
   return (
     <div className='authenticationBody'>
@@ -45,7 +46,6 @@ function Authentication({ getToken, token, isLoggedIn }) {
 
 const mapStateTopProps = (state) => ({
   token: state.setToken.accessToken,
-  isLoggedIn: state.setToken.isLoggedIn,
 });
 export default connect(mapStateTopProps, { getToken, setToken })(
   Authentication
