@@ -31,7 +31,7 @@ require('dotenv').config();
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 8080;
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
