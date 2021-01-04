@@ -10,7 +10,7 @@
 /coverage
 
 # production
-/build
+
 /Audio
 # misc
 .DS_Store
