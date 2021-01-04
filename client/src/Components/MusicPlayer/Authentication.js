@@ -4,32 +4,14 @@ import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
-/**
- * Obtains parameters from the hash of the URL
- * @return Object
- */
-const getHashParams = () => {
-  var hashParams = {};
-  var e,
-    r = /([^&;=]+)=?([^&;]*)/g,
-    q = window.location.hash.substring(1);
-  while ((e = r.exec(q))) {
-    hashParams[e[1]] = decodeURIComponent(e[2]);
-  }
-  let hash = hashParams.access_token;
-  console.log('hash', hash);
-  if (hash) {
-    getToken(hash);
-  }
-};
-getHashParams();
+
 function Authentication({ getToken }) {
   useEffect(() => {
     /**
      * Obtains parameters from the hash of the URL
      * @return Object
      */
-    const getHashParams = () => {
+    const getHashParams = async () => {
       var hashParams = {};
       var e,
         r = /([^&;=]+)=?([^&;]*)/g,
@@ -37,9 +19,9 @@ function Authentication({ getToken }) {
       while ((e = r.exec(q))) {
         hashParams[e[1]] = decodeURIComponent(e[2]);
       }
-      let hash = hashParams.access_token;
+      let hash = await hashParams.access_token;
       if (hash) {
-        getToken();
+        await getToken();
       }
     };
     getHashParams();
