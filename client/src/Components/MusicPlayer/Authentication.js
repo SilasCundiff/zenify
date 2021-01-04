@@ -1,12 +1,10 @@
-import React, { useEffect, useLocation } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
 function Authentication({ getToken }) {
-  const newLocation = useLocation();
-  console.log('newLocation', newLocation);
   useEffect(() => {
     /**
      * Obtains parameters from the hash of the URL
