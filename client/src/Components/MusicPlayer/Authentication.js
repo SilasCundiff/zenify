@@ -26,11 +26,9 @@ function Authentication({ getToken }) {
     getHashParams();
   }, [getToken]);
 
-  let success = false;
-  const handleLogin = () => {
-    while (!success) {
-      getHashParams();
-    }
+
+  const handleLogin = async () => {
+    await getHashParams();
   };
 
   /**
@@ -49,7 +47,6 @@ function Authentication({ getToken }) {
     let hash = hashParams.access_token;
     if (hash) {
       getToken();
-      success = true;
     }
   };
   return (
