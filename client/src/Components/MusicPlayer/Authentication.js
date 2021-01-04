@@ -17,8 +17,9 @@ const getHashParams = () => {
     hashParams[e[1]] = decodeURIComponent(e[2]);
   }
   let hash = hashParams.access_token;
+  console.log('hash', hash);
   if (hash) {
-    getToken();
+    getToken(hash);
   }
 };
 getHashParams();
