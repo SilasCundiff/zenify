@@ -10,7 +10,8 @@ const getHashParams = async () => {
   while ((e = r.exec(q))) {
     hashParams[e[1]] = decodeURIComponent(e[2]);
   }
-  return (newToken = await hashParams.access_token);
+  newToken = await hashParams.access_token;
+  return newToken;
 };
 export const getToken = () => (dispatch) => {
   getHashParams().then(() => {
