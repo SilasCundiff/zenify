@@ -10,19 +10,18 @@ const getHashParams = async () => {
   while ((e = r.exec(q))) {
     hashParams[e[1]] = decodeURIComponent(e[2]);
   }
-  newToken = await hashParams.access_token;
-  return newToken;
+  newToken = hashParams.access_token;
 };
 export const getToken = () => (dispatch) => {
-  getHashParams().then(() => {
-    if (newToken !== null) {
-      return dispatch({
-        type: SET_ACCESS_TOKEN,
-        payload: {
-          accessToken: newToken,
-          isLoggedIn: true,
-        },
-      });
-    }
-  });
+  getHashParams();
+  if (newToken !== null) {
+    return dispatch({
+      type: SET_ACCESS_TOKEN,
+      payload: {
+        accessToken: newToken,
+        isLoggedIn: true,
+      },
+    });
+  }
 };
+
