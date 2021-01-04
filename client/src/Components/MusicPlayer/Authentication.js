@@ -7,26 +7,24 @@ import './authenticationStyles.css';
 function Authentication({ getToken }) {
   const [location, setlocation] = useState(useLocation());
   useEffect(() => {
-    if (location !== '/') {
-      /**
-       * Obtains parameters from the hash of the URL
-       * @return Object
-       */
-      const getHashParams = () => {
-        var hashParams = {};
-        var e,
-          r = /([^&;=]+)=?([^&;]*)/g,
-          q = window.location.hash.substring(1);
-        while ((e = r.exec(q))) {
-          hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
-        let hash = hashParams.access_token;
-        if (hash) {
-          getToken();
-        }
-      };
-      getHashParams();
-    }
+    /**
+     * Obtains parameters from the hash of the URL
+     * @return Object
+     */
+    const getHashParams = () => {
+      var hashParams = {};
+      var e,
+        r = /([^&;=]+)=?([^&;]*)/g,
+        q = location.hash.substring(1);
+      while ((e = r.exec(q))) {
+        hashParams[e[1]] = decodeURIComponent(e[2]);
+      }
+      let hash = hashParams.access_token;
+      if (hash) {
+        getToken();
+      }
+    };
+    getHashParams();
   }, [getToken, location]);
 
   return (
