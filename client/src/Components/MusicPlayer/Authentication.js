@@ -10,7 +10,7 @@ function Authentication({ getToken }) {
      * Obtains parameters from the hash of the URL
      * @return Object
      */
-    const getHashParams = () => {
+    const getHashParams = async () => {
       var hashParams = {};
       var e,
         r = /([^&;=]+)=?([^&;]*)/g,
@@ -18,25 +18,19 @@ function Authentication({ getToken }) {
       while ((e = r.exec(q))) {
         hashParams[e[1]] = decodeURIComponent(e[2]);
       }
-      let hash = hashParams.access_token;
+      let hash = await hashParams.access_token;
       if (hash) {
-        getToken();
+        await getToken();
       }
     };
     getHashParams();
   }, [getToken]);
 
-
-  const handleLogin = async () => {
-    await getHashParams();
-  };
-
   /**
    * Obtains parameters from the hash of the URL
    * @return Object
    */
-
-  const getHashParams = () => {
+  const getHashParams = async () => {
     var hashParams = {};
     var e,
       r = /([^&;=]+)=?([^&;]*)/g,
@@ -44,10 +38,15 @@ function Authentication({ getToken }) {
     while ((e = r.exec(q))) {
       hashParams[e[1]] = decodeURIComponent(e[2]);
     }
-    let hash = hashParams.access_token;
+    let hash = await hashParams.access_token;
     if (hash) {
-      getToken();
+      await getToken();
     }
+  };
+  const handleClick = () => {
+    setTimeout(() => {
+      getHashParams();
+    }, 2000);
   };
   return (
     <div className='authenticationBody'>
@@ -57,8 +56,10 @@ function Authentication({ getToken }) {
         <span className='introName'> By Silvanus Designs </span>
       </div>
       <img src={logo} alt='Silvanus Designs' className='introLogo' />
-      <a href='/login' onClick={handleLogin}>
-        <button className='loginButton'>Spotify Login Required</button>
+      <a href='/login'>
+        <button className='loginButton' onClick={handleClick}>
+          Spotify Login Required
+        </button>
       </a>
     </div>
   );
