@@ -29,9 +29,9 @@ function Authentication({ getToken }) {
 
   let success = false;
   const handleLogin = async () => {
-    if (location !== '/') {
-      await getHashParams();
-    }
+    // if (location.includes('accesstoken')) {
+    getHashParams();
+    // }
   };
 
   /**
