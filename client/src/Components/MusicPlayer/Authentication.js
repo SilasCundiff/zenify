@@ -6,7 +6,7 @@ import logo from '../logo.svg';
 import './authenticationStyles.css';
 
 function Authentication({ getToken }) {
-  useEffect(() => {
+  const handleClick = () => {
     /**
      * Obtains parameters from the hash of the URL
      * @return Object
@@ -24,9 +24,13 @@ function Authentication({ getToken }) {
         await getToken();
       }
     };
-    getHashParams();
-  }, [getToken]);
-
+    setTimeout(() => {
+      getHashParams();
+    }, 5000);
+  };
+  useEffect(() => {
+    handleClick();
+  }, []);
   return (
     <div className='authenticationBody'>
       <div className='introTitle'>
@@ -35,7 +39,7 @@ function Authentication({ getToken }) {
         <span className='introName'> By Silvanus Designs </span>
       </div>
       <img src={logo} alt='Silvanus Designs' className='introLogo' />
-      <a href='/login'>
+      <a href='/login' onClick={handleClick}>
         <button className='loginButton'>Spotify Login Required</button>
       </a>
     </div>
