@@ -132,6 +132,7 @@ function Search({ token, setNowPlaying }) {
             {tracks ? (
               <tbody>
                 {tracks.map((track) => {
+                  console.log(track);
                   return (
                     <tr key={`${track.type}:${track.id}`}>
                       <td>
@@ -184,6 +185,7 @@ function Search({ token, setNowPlaying }) {
               trackArtistColor: '#1DB954',
               trackNameColor: '#1DB954',
             }}
+            offset={1000}
             token={token}
             uris={[`spotify:${selected.type}:${selected.id}`]}
             callback={(state) => {
