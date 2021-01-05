@@ -6,8 +6,8 @@ import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
 function Authentication({ getToken, token, isLoggedIn }) {
-  const location = useLocation();
-  console.log('location', location);
+  const mylocation = useLocation();
+  console.log('location', mylocation);
   console.log(token);
   console.log(getToken);
   console.log(isLoggedIn);
