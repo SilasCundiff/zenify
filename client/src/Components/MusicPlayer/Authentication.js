@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLocation } from 'react';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
 function Authentication({ getToken, token, isLoggedIn }) {
+  const location = useLocation();
+  console.log('location', location);
   console.log(token);
   console.log(getToken);
   console.log(isLoggedIn);
+
   useEffect(() => {
     console.log('inside use effect');
     /**
@@ -23,7 +26,7 @@ function Authentication({ getToken, token, isLoggedIn }) {
       while ((e = r.exec(q))) {
         hashParams[e[1]] = decodeURIComponent(e[2]);
       }
-      console.log('get hash params vars', hashParams, e, r, q);
+      console.log('get hash params vars', hashParams, e, q);
       let hash = hashParams.access_token;
       console.log('hash', hash);
       if (hash) {
@@ -32,7 +35,7 @@ function Authentication({ getToken, token, isLoggedIn }) {
       }
     };
     getHashParams();
-  }, [getToken]);
+  }, [getToken, isLoggedIn]);
 
   return (
     <div className='authenticationBody'>
