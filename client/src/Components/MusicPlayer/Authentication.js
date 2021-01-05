@@ -13,6 +13,8 @@ function Authentication({ getToken, token, isLoggedIn }) {
   console.log(isLoggedIn);
 
   useEffect(() => {
+    let testHash = new URLSearchParams(mylocation.search).get('access_token');
+    console.log('testHash', testHash);
     console.log('inside use effect');
     /**
      * Obtains parameters from the hash of the URL
@@ -36,7 +38,7 @@ function Authentication({ getToken, token, isLoggedIn }) {
       }
     };
     getHashParams();
-  }, [getToken, isLoggedIn]);
+  }, [getToken, isLoggedIn, mylocation]);
 
   return (
     <div className='authenticationBody'>
