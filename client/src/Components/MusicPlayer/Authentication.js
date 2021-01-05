@@ -4,9 +4,8 @@ import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
-
 function Authentication({ getToken }) {
-  const handleClick = () => {
+  useEffect(() => {
     /**
      * Obtains parameters from the hash of the URL
      * @return Object
@@ -26,11 +25,9 @@ function Authentication({ getToken }) {
     };
     setTimeout(() => {
       getHashParams();
-    }, 5000);
-  };
-  useEffect(() => {
-    handleClick();
-  }, []);
+    }, 1000);
+  }, [getToken]);
+
   return (
     <div className='authenticationBody'>
       <div className='introTitle'>
@@ -39,7 +36,7 @@ function Authentication({ getToken }) {
         <span className='introName'> By Silvanus Designs </span>
       </div>
       <img src={logo} alt='Silvanus Designs' className='introLogo' />
-      <a href='/login' onClick={handleClick}>
+      <a href='/login'>
         <button className='loginButton'>Spotify Login Required</button>
       </a>
     </div>
