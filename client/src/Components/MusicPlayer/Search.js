@@ -72,7 +72,7 @@ function Search({ token, setNowPlaying }) {
       id: `${id}`,
     });
 
-    console.log('selected', selected);
+    // console.log('selected', selected);
   };
 
   const getNowPlaying = (state) => {
@@ -132,7 +132,6 @@ function Search({ token, setNowPlaying }) {
             {tracks ? (
               <tbody>
                 {tracks.map((track) => {
-                  console.log(track);
                   return (
                     <tr key={`${track.type}:${track.id}`}>
                       <td>
