@@ -12,9 +12,10 @@ let dance = 0;
 let opacity = 0.8;
 let vertical = 0;
 let horizontal = 0;
-// let songStartTimestamp,
-// songEndTimestamp,
-let timePassed, currentSegment;
+let songStartTimestamp,
+  // songEndTimestamp,
+  timePassed,
+  currentSegment;
 // currentSection,
 // currentBar,
 // currentBeat,
@@ -69,16 +70,15 @@ class ParticlesContainer extends Component {
   };
 
   componentDidUpdate() {
-    let date = new Date();
-    let songStartTimestamp = date.getTime() + 850;
     this.segments = this.props.segments;
     this.isPlaying = this.props.isPlaying;
     this.remainingDuration = this.props.duration - this.props.progress;
     this.duration = this.props.duration;
     this.progress = this.props.progress;
-    this.songStartTimestamp = songStartTimestamp;
 
-    console.log('songStartTimestamp', songStartTimestamp);
+    let date = new Date();
+    songStartTimestamp = date.getTime() + 850;
+    // console.log('songStartTimestamp', songStartTimestamp);
     this.togglePlay();
   }
   togglePlay = () => {
@@ -104,7 +104,7 @@ class ParticlesContainer extends Component {
 
   timeKeeper = () => {
     const date = new Date();
-    timePassed = date - this.songStartTimestamp + this.progress;
+    timePassed = date - songStartTimestamp + this.progress;
 
     if (
       this.props.segments.length > 0 &&
