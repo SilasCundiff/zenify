@@ -187,6 +187,7 @@ function Search({ token, setNowPlaying }) {
             token={token}
             uris={[`spotify:${selected.type}:${selected.id}`]}
             callback={(state) => {
+              console.log(state);
               getNowPlaying(state);
             }}
           />
