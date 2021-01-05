@@ -12,7 +12,14 @@ let dance = 0;
 let opacity = 0.8;
 let vertical = 0;
 let horizontal = 0;
-let songStartTimestamp, timePassed, currentSegment;
+let songStartTimestamp,
+  // songEndTimestamp,
+  timePassed,
+  currentSegment;
+// currentSection,
+// currentBar,
+// currentBeat,
+// currentTatum;
 
 class ParticlesContainer extends Component {
   constructor(props) {
@@ -23,12 +30,14 @@ class ParticlesContainer extends Component {
     this.duration = this.props.duration;
     this.progress = this.props.progress;
     this.songStartTimestamp = null;
+    this.songEndTimestamp = null;
     this.remainingDuration = this.props.duration - this.props.progress;
   }
 
   componentDidMount() {
     this.segments = this.props.segments;
     currentSegment = this.props.segments[0];
+    // currentBeat = this.props.beats[0];
     this.containerRef.current = this.getContainer(this.containerRef.current);
   }
 
@@ -48,6 +57,8 @@ class ParticlesContainer extends Component {
           p.noiseAngle = 0;
         }
         p.velocity.horizontal = horizontal;
+        // p.velocity.vertical = vertical; //Not sure if I want to use this yet, makes the particles feel more mechanical and the latency more noticeable
+        // console.log('p.velocity', p.velocity)
         p.noiseAngle = dance;
         return {
           angle: p.noiseAngle,
@@ -123,15 +134,23 @@ class ParticlesContainer extends Component {
               colorS = 50;
             }
             colorH = (color * speed) / 1.5;
+            // console.log('colorH', colorH);
+            // if (colorH > 360) {
+            //   colorH = 360;
+            // } else if (colorH < 0) {
+            //   colorH = 0;
+            // }
             vertical = ((attack % speed) / 2) % 2;
             if (isNaN(vertical)) {
               vertical = 0;
             }
-
+            // console.log('vertical', vertical);
             if (i % 20 === 0) {
+              // horizontal = -mids % speed;
               dance = brightness / 2 - mids;
             } else {
               dance = brightness * 2 + mids;
+              // horizontal = mids % speed;
             }
 
             break;
@@ -159,7 +178,14 @@ class ParticlesContainer extends Component {
   }
 }
 const mapStateTopProps = (state) => ({
+  isPlaying: state.setNowPlaying.isPlaying,
+  duration: state.setNowPlaying.durationMs,
+  progress: state.setNowPlaying.progressMs,
+  sections: state.setSongAnalysis.sections,
   segments: state.setSongAnalysis.segments,
+  bars: state.setSongAnalysis.bars,
+  beats: state.setSongAnalysis.beats,
+  tatums: state.setSongAnalysis.tatums,
 });
 export default connect(mapStateTopProps, { setNowPlaying, setSongAnalysis })(
   ParticlesContainer
