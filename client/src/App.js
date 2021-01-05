@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Route exact path='/'>
+        <Route path='/'>
           <div className='App'>
             <MusicPlayer />
             <SongAnalyizer />
