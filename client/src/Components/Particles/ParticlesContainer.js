@@ -77,7 +77,7 @@ class ParticlesContainer extends Component {
     this.progress = this.props.progress;
 
     let date = new Date();
-    songStartTimestamp = date.getTime() + 1000;
+    songStartTimestamp = date.getTime();
     // console.log('songStartTimestamp', songStartTimestamp);
     this.togglePlay();
   }
