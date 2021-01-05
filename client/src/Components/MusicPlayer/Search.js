@@ -72,7 +72,7 @@ function Search({ token, setNowPlaying }) {
       id: `${id}`,
     });
 
-    // console.log('selected', selected);
+    console.log('selected', selected);
   };
 
   const getNowPlaying = (state) => {
@@ -185,7 +185,6 @@ function Search({ token, setNowPlaying }) {
               trackArtistColor: '#1DB954',
               trackNameColor: '#1DB954',
             }}
-            offset={1}
             token={token}
             uris={[`spotify:${selected.type}:${selected.id}`]}
             callback={(state) => {

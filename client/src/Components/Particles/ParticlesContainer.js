@@ -42,7 +42,7 @@ class ParticlesContainer extends Component {
   }
 
   getContainer = (container) => {
-    container.options.particles.move.noise.delay.value = 0.25;
+    container.options.particles.move.noise.delay.value = 0.0025;
     container.options.particles.move.noise.delay.random.enable = true;
 
     container.setNoise({
