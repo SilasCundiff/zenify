@@ -1,4 +1,5 @@
-import React, { useEffect, useLocation } from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
