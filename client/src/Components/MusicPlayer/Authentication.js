@@ -14,12 +14,12 @@ function Authentication({ getToken }) {
       var hashParams = {};
       var e,
         r = /([^&;=]+)=?([^&;]*)/g,
-        q = window.location.hash.substring(1);
+        q = await window.location.hash.substring(1);
       while ((e = r.exec(q))) {
-        hashParams[e[1]] = decodeURIComponent(e[2]);
+        hashParams[e[1]] = await decodeURIComponent(e[2]);
       }
       let hash = await hashParams.access_token;
-      console.log('before hash');
+      console.log('hash', hash);
       if (hash) {
         console.log('hash found');
         await getToken();
