@@ -1,28 +1,16 @@
 import React, { useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
-function Authentication({ getToken, token, isLoggedIn }) {
-  const location = useLocation();
-  const slug = useParams();
-  console.log('location', location);
-  console.log('slug', slug);
-  console.log(token);
-  console.log(getToken);
-  console.log(isLoggedIn);
-  let testHash = new URLSearchParams(location.search).get('access_token');
-  console.log('testHash', testHash);
+function Authentication({ getToken }) {
   useEffect(() => {
-    console.log('inside use effect');
     /**
      * Obtains parameters from the hash of the URL
      * @return Object
      */
     const getHashParams = () => {
-      console.log('inside getHash Params');
       var hashParams = {};
       var e,
         r = /([^&;=]+)=?([^&;]*)/g,
@@ -30,16 +18,15 @@ function Authentication({ getToken, token, isLoggedIn }) {
       while ((e = r.exec(q))) {
         hashParams[e[1]] = decodeURIComponent(e[2]);
       }
-      console.log('get hash params vars', hashParams, e, q);
+
       let hash = hashParams.access_token;
-      console.log('hash', hash);
+
       if (hash) {
-        console.log('inside hash check');
         getToken();
       }
     };
     getHashParams();
-  }, [getToken, location]);
+  }, [getToken]);
 
   return (
     <div className='authenticationBody'>
