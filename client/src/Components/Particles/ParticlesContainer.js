@@ -70,7 +70,7 @@ class ParticlesContainer extends Component {
 
   componentDidUpdate() {
     let date = new Date();
-    let songStartTimestamp = date.getTime() + 900;
+    let songStartTimestamp = date.getTime() + 3000;
     this.segments = this.props.segments;
     this.isPlaying = this.props.isPlaying;
     this.remainingDuration = this.props.duration - this.props.progress;
