@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import setToken from '../reducers/auth';
 import setNowPlaying from '../reducers/nowPlaying';
 import { setSongAnalysis } from '../actions/songAnalysis';
-function SongAnalyizer({ token, id, setSongAnalysis, nowPlaying }) {
+function SongAnalyizer({ token, id, setSongAnalysis }) {
   useEffect(() => {
     if (id !== '') {
       fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
@@ -23,7 +23,7 @@ function SongAnalyizer({ token, id, setSongAnalysis, nowPlaying }) {
           console.log('err', err);
         });
     }
-  }, [id, token, setSongAnalysis, nowPlaying]);
+  }, [id, token, setSongAnalysis]);
 
   return (
     <div style={{ textAlign: 'left' }}>
