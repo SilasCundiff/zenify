@@ -6,7 +6,6 @@ const initialState = {
 };
 
 export default function setToken(state = initialState, action) {
-  console.log('inside auth reducer');
   const { type, payload } = action;
   switch (type) {
     case SET_ACCESS_TOKEN:
