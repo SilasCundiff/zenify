@@ -6,29 +6,37 @@ import logo from '../logo.svg';
 import './authenticationStyles.css';
 function Authentication({ getToken }) {
   useEffect(() => {
-    setTimeout(() => {
-      /**
-       * Obtains parameters from the hash of the URL
-       * @return Object
-       */
-      const getHashParams = async () => {
-        var hashParams = {};
-        var e,
-          r = /([^&;=]+)=?([^&;]*)/g,
-          q = await window.location.hash.substring(1);
-        while ((e = r.exec(q))) {
-          hashParams[e[1]] = await decodeURIComponent(e[2]);
-        }
-        let hash = await hashParams.access_token;
-        console.log('hash', hash);
+    /**
+     * Obtains parameters from the hash of the URL
+     * @return Object
+     */
+    const getHashParams = async () => {
+      console.log('inside get hash params');
+      var hashParams = {};
+      var e,
+        r = /([^&;=]+)=?([^&;]*)/g,
+        q = await window.location.hash.substring(1);
+      while ((e = r.exec(q))) {
+        hashParams[e[1]] = await decodeURIComponent(e[2]);
+      }
+      let hash = await hashParams.access_token;
+      console.log('hash', hash);
+      setTimeout(async () => {
         if (hash) {
           console.log('hash found');
           await getToken();
         }
-      };
-      console.log('use effect');
-      getHashParams();
-    }, 3000);
+      }, 2000);
+    };
+    console.log('use effect');
+    const callHashParams = async () => {
+      console.log('call Hash Params');
+      await getHashParams();
+    };
+    setTimeout(() => {
+      console.log('set timeout');
+      callHashParams();
+    }, 5000);
   }, [getToken]);
 
   return (
