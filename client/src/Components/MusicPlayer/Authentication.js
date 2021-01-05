@@ -4,39 +4,34 @@ import { getToken } from '../../actions/auth.js';
 import setToken from '../../reducers/auth';
 import logo from '../logo.svg';
 import './authenticationStyles.css';
-function Authentication({ getToken }) {
+function Authentication({ getToken, token, isLoggedIn }) {
+  console.log(token);
+  console.log(getToken);
+  console.log(isLoggedIn);
   useEffect(() => {
+    console.log('inside use effect');
     /**
      * Obtains parameters from the hash of the URL
      * @return Object
      */
-    const getHashParams = async () => {
-      console.log('inside get hash params');
+    const getHashParams = () => {
+      console.log('inside getHash Params');
       var hashParams = {};
       var e,
         r = /([^&;=]+)=?([^&;]*)/g,
-        q = await window.location.hash.substring(1);
+        q = window.location.hash.substring(1);
       while ((e = r.exec(q))) {
-        hashParams[e[1]] = await decodeURIComponent(e[2]);
+        hashParams[e[1]] = decodeURIComponent(e[2]);
       }
-      let hash = await hashParams.access_token;
+      console.log('get hash params vars', hashParams, e, r, q);
+      let hash = hashParams.access_token;
       console.log('hash', hash);
-      setTimeout(async () => {
-        if (hash) {
-          console.log('hash found');
-          await getToken();
-        }
-      }, 2000);
+      if (hash) {
+        console.log('inside hash check');
+        getToken();
+      }
     };
-    console.log('use effect');
-    const callHashParams = async () => {
-      console.log('call Hash Params');
-      await getHashParams();
-    };
-    setTimeout(() => {
-      console.log('set timeout');
-      callHashParams();
-    }, 5000);
+    getHashParams();
   }, [getToken]);
 
   return (
@@ -56,6 +51,7 @@ function Authentication({ getToken }) {
 
 const mapStateTopProps = (state) => ({
   token: state.setToken.accessToken,
+  isLoggedIn: state.setToken.isLoggedIn,
 });
 export default connect(mapStateTopProps, { getToken, setToken })(
   Authentication

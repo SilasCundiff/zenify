@@ -3,7 +3,6 @@ import { SET_ACCESS_TOKEN } from './types';
 let newToken;
 
 const getHashParams = async () => {
-  console.log('inside get hash params in action');
   var hashParams = {};
   var e,
     r = /([^&;=]+)=?([^&;]*)/g,
@@ -11,15 +10,11 @@ const getHashParams = async () => {
   while ((e = r.exec(q))) {
     hashParams[e[1]] = decodeURIComponent(e[2]);
   }
-  console.log('hashParams', hashParams);
-  newToken = await hashParams.access_token;
-  console.log('newToken', newToken);
+  newToken = hashParams.access_token;
 };
-export const getToken = () => async (dispatch) => {
-  await getHashParams();
-  console.log('inside of dispatch');
+export const getToken = () => (dispatch) => {
+  getHashParams();
   if (newToken !== null) {
-    console.log('new token true');
     return dispatch({
       type: SET_ACCESS_TOKEN,
       payload: {
