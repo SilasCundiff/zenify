@@ -19,13 +19,14 @@ function Authentication({ getToken }) {
         hashParams[e[1]] = decodeURIComponent(e[2]);
       }
       let hash = await hashParams.access_token;
+      console.log('before hash');
       if (hash) {
+        console.log('hash found');
         await getToken();
       }
     };
-    setTimeout(() => {
-      getHashParams();
-    }, 1000);
+    console.log('use effect');
+    getHashParams();
   }, [getToken]);
 
   return (
