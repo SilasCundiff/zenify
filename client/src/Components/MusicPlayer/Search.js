@@ -77,7 +77,7 @@ function Search({ token, setNowPlaying }) {
 
   const getNowPlaying = (state) => {
     setNowPlaying(state);
-    console.log(state);
+    // console.log(state);
   };
   const handleClick = () => {
     setZen(!zen);
@@ -188,7 +188,7 @@ function Search({ token, setNowPlaying }) {
             token={token}
             uris={[`spotify:${selected.type}:${selected.id}`]}
             callback={async (state) => {
-              console.log(await state);
+              // console.log(await state);
               getNowPlaying(await state);
             }}
           />
