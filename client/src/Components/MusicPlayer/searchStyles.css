@@ -4,6 +4,7 @@
     left: 0;
     z-index: 100;
     text-align: left;
+    display: flex;
 }
 .ZenMode, .ZenModePlayer {
     position: relative;
@@ -16,7 +17,7 @@
     transition: all .5s cubic-bezier(1, 0, 0, 1);
     font-weight: 700;
     outline: none;
-    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
+    font-size: calc(10px + 6 * ((100vw - 320px) / 680));
 }
 .ZenMode:hover, .ZenMode:active, .ZenMode:focus {
     background-color: #fff;
@@ -46,7 +47,7 @@
 .Search label {
     color: #1DB954;
     align-items: center;
-    margin: 0 20px 0;
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
 }
 .Search input {
     font-size: calc(12px + 6 * ((100vw - 320px) / 680));
@@ -58,7 +59,8 @@
 }
 .SearchForm {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
 }
 .searchButton {
     border: none;
@@ -194,10 +196,7 @@
     transition: all 2s;
 }
 
-.fab {
-    font-size: 50px;
-    margin: 0 25px;
-}
+
 
 .searchLogo {
     height: 50px;
@@ -206,4 +205,18 @@
     right: 0;
     z-index: 100;
     margin: 16px;
+}
+@media only screen and (max-width: 1280px) {
+    .buttonContainer {
+        flex-direction: column;
+    }
+    .ZenMode, .ZenModePlayer {
+        padding: 6px;
+        margin: 10px 10px 0;
+        font-size: calc(8px + 6 * ((100vw - 320px) / 680));
+    }
+    .searchButton {
+        padding: 6px
+    }
+
 }

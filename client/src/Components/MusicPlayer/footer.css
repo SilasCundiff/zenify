@@ -16,10 +16,15 @@
  .spotifySpan, .reactSpan, .footer {
     padding-bottom: 20px;
 }
+.fab {
+    font-size: 50px;
+    margin: 0 25px;
+}
 .linkContainer {
     margin-bottom: 0;
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .linkContainer a {
@@ -28,5 +33,14 @@
 }
 .footerLogoIcon {
     height: 56px;
-    margin-left: 16px
+    margin-left: 16px;
+}
+@media only screen and (max-width: 1280px) {
+    .fab {
+        margin: 0 5px 0 10px;
+    }
+    .footerLogoIcon {
+
+        margin-left: 0;
+    }
 }
