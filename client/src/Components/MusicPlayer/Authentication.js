@@ -33,11 +33,11 @@ function Authentication({ getToken }) {
       <div className='introTitle'>
         Zenify
         <br />
-        <span className='introName'> By Silvanus Designs </span>
+        <span className='introName'>By Silvanus Designs </span>
       </div>
       <img src={logo} alt='Silvanus Designs' className='introLogo' />
       <a href='/login'>
-        <button className='loginButton'>Spotify Premium Login Required</button>
+        <button className='loginButton'>Login - Spotify Premium Required</button>
       </a>
     </div>
   );

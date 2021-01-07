@@ -16,7 +16,7 @@ function Search({ token, setNowPlaying }) {
     id: '',
   });
   const [zen, setZen] = useState(false);
-  const [zenPlayer, setZenPlayer] = useState(false);
+  const [zenPlayer, setZenPlayer] = useState(true);
 
   //Taken from Spotify web api example and altered to fit my needs
   spotifyWebApi.setAccessToken(token);
@@ -72,8 +72,7 @@ function Search({ token, setNowPlaying }) {
       type: `${type}`,
       id: `${id}`,
     });
-
-    // console.log('selected', selected);
+    setZenPlayer(false);
   };
 
   const getNowPlaying = (state) => {
