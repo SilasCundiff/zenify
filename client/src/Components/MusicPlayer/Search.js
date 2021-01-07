@@ -114,6 +114,9 @@ function Search({ token, setNowPlaying }) {
               value={search || ''}
               onChange={handleChange}
             />
+            <button onClick={handleSubmit}>
+              <i class='fas fa-search'></i>
+            </button>
           </form>
         </div>
 
