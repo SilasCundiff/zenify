@@ -96,11 +96,7 @@ function Search({ token, setNowPlaying }) {
         >
           {`${zenPlayer ? 'Show' : 'Hide'}`} Zenify Player
         </button>
-        <button
-          id='ZenButton'
-          className={`ZenMode`}
-          onClick={handleClick}
-        >
+        <button id='ZenButton' className={`ZenMode`} onClick={handleClick}>
           {`${zen ? 'Show' : 'Hide'}`} Zenify Search
         </button>
       </div>
@@ -182,22 +178,24 @@ function Search({ token, setNowPlaying }) {
       </div>
       <div className={`Player ${zenPlayer ? 'zen' : 'nozen'}`}>
         {selected.id ? (
-          <SpotifyPlayer
-            styles={{
-              bgColor: '#191414',
-              color: '#1DB954',
-              loaderColor: '#1DB954',
-              sliderColor: '#1DB954',
-              trackArtistColor: '#1DB954',
-              trackNameColor: '#1DB954',
-            }}
-            token={token}
-            uris={[`spotify:${selected.type}:${selected.id}`]}
-            callback={async (state) => {
-              // console.log(await state);
-              getNowPlaying(await state);
-            }}
-          />
+          <div className='player-container'>
+            <SpotifyPlayer
+              styles={{
+                bgColor: '#191414',
+                color: '#1DB954',
+                loaderColor: '#1DB954',
+                sliderColor: '#1DB954',
+                trackArtistColor: '#1DB954',
+                trackNameColor: '#1DB954',
+              }}
+              token={token}
+              uris={[`spotify:${selected.type}:${selected.id}`]}
+              callback={async (state) => {
+                // console.log(await state);
+                getNowPlaying(await state);
+              }}
+            />
+          </div>
         ) : null}
       </div>
       {!zen ? <Footer /> : null}
