@@ -96,7 +96,7 @@ function Search({ token, setNowPlaying }) {
         >
           {`${zenPlayer ? 'Show' : 'Hide'}`} Zenify Player
         </button>
-        <button
+        <button 
           id='ZenButton'
           className={`ZenMode ${zen ? 'zen' : 'nozen'}`}
           onClick={handleClick}
@@ -114,7 +114,7 @@ function Search({ token, setNowPlaying }) {
               value={search || ''}
               onChange={handleChange}
             />
-            <button onClick={handleSubmit}>
+            <button onClick={handleSubmit} className='searchButton'>
               <i class='fas fa-search'></i>
             </button>
           </form>
@@ -138,28 +138,28 @@ function Search({ token, setNowPlaying }) {
                 {tracks.map((track) => {
                   return (
                     <tr key={`${track.type}:${track.id}`}>
-                      <td>
+                      <td className='td-image'>
                         <img
                           className='searchResultAlbumImage'
                           src={track.album.images[2].url}
                           alt={`${track.album.name}`}
                         />
                       </td>
-                      <td
+                      <td className='td-track'
                         onClick={() => {
                           handleSelected(track.type, track.id);
                         }}
                       >
                         {track.name}
                       </td>
-                      <td
+                      <td className='td-album'
                         onClick={() => {
                           handleSelected(track.album.type, track.album.id);
                         }}
                       >
                         {track.album.name}
                       </td>
-                      <td
+                      <td className='td-artist'
                         onClick={() => {
                           handleSelected(
                             track.artists[0].type,

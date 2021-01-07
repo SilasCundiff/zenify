@@ -19,6 +19,12 @@
 .linkContainer {
     margin-bottom: -1rem;
 }
-.footerLogo {
-    height: 8vh;
+.searchLogo {
+    height: 7vh;
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    z-index: 100;
+    padding: 0;
+    margin: 0;
 }

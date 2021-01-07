@@ -25,7 +25,7 @@ function Footer() {
           Zenify - Silvanus Designs - Silas Cundiff - Copyright&copy; 2021
         </footer>
       </div>
-      <img src={icon} alt='Silvanus Designs' className='footerLogo' />
+      <img src={icon} alt='Silvanus Designs' className='searchLogo' />
     </div>
   );
 }
