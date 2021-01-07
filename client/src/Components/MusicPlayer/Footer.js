@@ -19,10 +19,10 @@ function Footer() {
         </div>
         <span className='spotifySpan'>Music provided by Spotify</span>
         <span className='reactSpan'>
-          Made with <i class='fas fa-heart'></i> using React
+          Made with <i class='fas fa-heart'></i> &amp; React
         </span>
         <footer className='footer'>
-          Zenify - Silvanus Designs - Silas Cundiff - Copyright&copy; 2021
+          Silvanus Designs - Copyright&copy; 2021
         </footer>
       </div>
       

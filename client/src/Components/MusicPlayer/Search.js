@@ -94,10 +94,10 @@ function Search({ token, setNowPlaying }) {
           id='ZenPlayerButton'
           onClick={handleClick2}
         >
-          {`${zenPlayer ? 'Show' : 'Hide'}`} Zenify Player
+          {`${zenPlayer ? 'Show' : 'Hide'}`} Player
         </button>
         <button id='ZenButton' className={`ZenMode`} onClick={handleClick}>
-          {`${zen ? 'Show' : 'Hide'}`} Zenify Search
+          {`${zen ? 'Show' : 'Hide'}`} Search
         </button>
       </div>
       <div className={`spotifyBody ${zen ? 'zen' : 'nozen'}`}>
