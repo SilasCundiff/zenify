@@ -32,7 +32,7 @@
 }
 
 .Search {
-    height: 80px;
+    height: 8vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -44,7 +44,7 @@
 }
 .Search label {
     color: #1DB954;
-    font-size: 2rem;
+    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
     margin: 0 20px 0;
 }
 .Search input {
@@ -67,7 +67,10 @@
     background-color: #1db954;
     outline:none;
 }
-
+.search-container {
+    display: flex;
+    align-items: center;
+}
 .searchButton .fas {
     color: white;
     padding: 3px;
@@ -113,7 +116,7 @@
 .searchResultsTable thead  th{
     position: sticky;
     top: 0;
-    font-size: 2rem;
+    font-size: calc(14px + 6 * ((100vw - 320px) / 680));
     border-bottom: 2px solid #1DB954;
     background-color: #191414;
     height: 48px;
@@ -126,7 +129,7 @@
     padding: 0;
     margin: 0;
     border-bottom: 2px solid #1DB954;
-    font-size: 1.5rem;
+    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
     font-weight: 300;
     border-right: 2px solid rgba(0,0,0, 0.05);
 }

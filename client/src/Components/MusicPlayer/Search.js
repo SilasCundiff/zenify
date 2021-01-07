@@ -104,15 +104,17 @@ function Search({ token, setNowPlaying }) {
         <div className='Search'>
           <form className='SearchForm show' onSubmit={handleSubmit}>
             <label htmlFor='trackSearch'>{message}</label>
-            <input
-              name='trackSearch'
-              type='text'
-              value={search || ''}
-              onChange={handleChange}
-            />
-            <button onClick={handleSubmit} className='searchButton'>
-              <i class='fas fa-search'></i>
-            </button>
+            <div className='search-container'>
+              <input
+                name='trackSearch'
+                type='text'
+                value={search || ''}
+                onChange={handleChange}
+              />
+              <button onClick={handleSubmit} className='searchButton'>
+                <i class='fas fa-search'></i>
+              </button>
+            </div>
           </form>
         </div>
         <img src={icon} alt='Silvanus Designs' className='searchLogo' />
