@@ -3,29 +3,34 @@
     top: 0;
     left: 0;
     z-index: 100;
-
-    /* background-color: ivory; */
     text-align: left;
 }
 .ZenMode, .ZenModePlayer {
     position: relative;
-    padding: 10px;
-    border-radius: 5%;
-    margin: 20px 10px 20px 20px;
+    padding: 12px;
+    border-radius: 1rem;
+    margin: 20px 10px;
     background-color: #1DB954;
     color: #fff;
     border: none;
     transition: all .5s cubic-bezier(1, 0, 0, 1);
     font-weight: 700;
+    outline: none;
+}
+.ZenMode:hover, .ZenMode:active, .ZenMode:focus {
+    background-color: #fff;
+    color: #1DB954;
+}
+.ZenModePlayer:hover, .ZenModePlayer:active, .ZenModePlayer:focus {
+    background-color: #fff;
+    color: #1DB954;
 }
 .buttonContainer:hover #ZenButton, .buttonContainer:hover #ZenPlayerButton {
     opacity: 1;
     visibility: visible;
     pointer-events: initial;
 }
-.ZenModePlayer {
-    left: 6%;
-}
+
 .Search {
     height: 80px;
     width: 100%;
@@ -175,16 +180,13 @@
     font-size: 50px;
     margin: 0 25px;
 }
-.footerLogoIcon {
-    height: 56px;
-    margin-left: 16px
-}
-.linkContainer {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-.linkContainer a {
-    text-decoration: none;
-    color: #1DB954;
+
+
+.searchLogo {
+    height: 50px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    margin: 16px;
 }

@@ -4,6 +4,7 @@ import { setNowPlaying } from '../../actions/nowPlaying.js';
 import Spotify from 'spotify-web-api-js';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import './searchStyles.css';
+import icon from '../icon.svg';
 import Footer from './Footer';
 const spotifyWebApi = new Spotify();
 function Search({ token, setNowPlaying }) {
@@ -90,15 +91,15 @@ function Search({ token, setNowPlaying }) {
     <div>
       <div className='buttonContainer'>
         <button
-          className={`ZenModePlayer ${zenPlayer ? 'zen' : 'nozen'}`}
+          className={`ZenModePlayer`}
           id='ZenPlayerButton'
           onClick={handleClick2}
         >
           {`${zenPlayer ? 'Show' : 'Hide'}`} Zenify Player
         </button>
-        <button 
+        <button
           id='ZenButton'
-          className={`ZenMode ${zen ? 'zen' : 'nozen'}`}
+          className={`ZenMode`}
           onClick={handleClick}
         >
           {`${zen ? 'Show' : 'Hide'}`} Zenify Search
@@ -119,7 +120,7 @@ function Search({ token, setNowPlaying }) {
             </button>
           </form>
         </div>
-
+        <img src={icon} alt='Silvanus Designs' className='searchLogo' />
         <div className={`searchResultsTable ${tracks ? 'show' : 'hide'}`}>
           <table>
             {tracks ? (
@@ -145,21 +146,24 @@ function Search({ token, setNowPlaying }) {
                           alt={`${track.album.name}`}
                         />
                       </td>
-                      <td className='td-track'
+                      <td
+                        className='td-track'
                         onClick={() => {
                           handleSelected(track.type, track.id);
                         }}
                       >
                         {track.name}
                       </td>
-                      <td className='td-album'
+                      <td
+                        className='td-album'
                         onClick={() => {
                           handleSelected(track.album.type, track.album.id);
                         }}
                       >
                         {track.album.name}
                       </td>
-                      <td className='td-artist'
+                      <td
+                        className='td-artist'
                         onClick={() => {
                           handleSelected(
                             track.artists[0].type,
