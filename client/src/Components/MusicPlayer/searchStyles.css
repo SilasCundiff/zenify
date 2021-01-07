@@ -158,7 +158,7 @@
     display: flex;
     align-items: center;
 }
-.player-continer {
+.player-container {
     width: 100%;
 }
 ._SliderRSWP {
@@ -210,7 +210,11 @@
     margin: 16px;
 }
 @media only screen and (max-width: 1280px) {
-    ._PlayerRSWP {
+    .Player {
+        height: 12%;
+    }
+
+    /* ._PlayerRSWP {
         height: 100%;
     }
     ._ContentRSWP {
@@ -222,7 +226,7 @@
     }
     ._ActionsRSWP {
         display: none;
-    }
+    } */
     .buttonContainer {
         flex-direction: column;
     }
@@ -234,5 +238,7 @@
     .searchButton {
         padding: 6px
     }
-
+    .searchResultsTable {
+        height: 80vh;
+    }
 }
