@@ -161,7 +161,7 @@
 .player-continer {
     width: 100%;
 }
-/* ._SliderRSWP {
+._SliderRSWP {
     height: 10px;
 }
 ._ContentRSWP {
@@ -173,7 +173,7 @@
 .rswp_active img {
     height: auto;
     width: auto;
-} */
+}
 .hide {
     opacity: 0;
     pointer-events: none;
@@ -210,6 +210,13 @@
     margin: 16px;
 }
 @media only screen and (max-width: 1280px) {
+    ._ContentRSWP {
+        flex-direction: unset;
+        width: 80%;
+    }
+    ._ControlsRSWP {
+        display: inline;
+    }
     .buttonContainer {
         flex-direction: column;
     }
