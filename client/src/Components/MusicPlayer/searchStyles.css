@@ -16,6 +16,7 @@
     transition: all .5s cubic-bezier(1, 0, 0, 1);
     font-weight: 700;
     outline: none;
+    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
 }
 .ZenMode:hover, .ZenMode:active, .ZenMode:focus {
     background-color: #fff;
@@ -44,11 +45,11 @@
 }
 .Search label {
     color: #1DB954;
-    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
+    align-items: center;
     margin: 0 20px 0;
 }
 .Search input {
-    font-size: 1.5rem;
+    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
     border-radius: 5px;
     background-color: #191414;
     border-color: #1DB954;
@@ -162,7 +163,7 @@
     margin: 0 1%;
 }
 .rswp_active {
-    font-size: 2rem;
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
 }
 .rswp_active img {
     height: auto;

@@ -48,9 +48,9 @@ function Search({ token, setNowPlaying }) {
         // console.log('returnedTracks', returnedTracks);
         if (returnedTracks.length > 0) {
           setTracks(returnedTracks);
-          setMessage('Enter a Track');
+          setMessage('Enter Track');
         } else {
-          setMessage('No Results Found, please try a different track name');
+          setMessage('No Results Found, try a different track');
         }
       });
   };
@@ -123,8 +123,8 @@ function Search({ token, setNowPlaying }) {
             {tracks ? (
               <thead>
                 <tr>
-                  <th>Album cover</th>
-                  <th>Track Name</th>
+                  <th>Artwork</th>
+                  <th>Track</th>
                   <th>Album</th>
                   <th>Artist</th>
                 </tr>
