@@ -77,13 +77,14 @@ class ParticlesContainer extends Component {
     this.progress = this.props.progress;
 
     let date = new Date();
-    songStartTimestamp = date.getTime();
-
+    songStartTimestamp = date.getTime() + 200;
+    // console.log('songStartTimestamp', songStartTimestamp);
     this.togglePlay();
   }
   togglePlay = () => {
     if (this.isPlaying) {
       this.requestAnimationFrame = requestAnimationFrame(this.tick);
+      // console.log('   this.props.segments;', this.props.segments);
     } else {
       speed = 1;
       colorH = 141;

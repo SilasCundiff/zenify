@@ -10,7 +10,7 @@ function Authentication({ getToken }) {
      * Obtains parameters from the hash of the URL
      * @return Object
      */
-    const getHashParams = () => {
+    const getHashParams = async () => {
       var hashParams = {};
       var e,
         r = /([^&;=]+)=?([^&;]*)/g,
@@ -18,9 +18,11 @@ function Authentication({ getToken }) {
       while ((e = r.exec(q))) {
         hashParams[e[1]] = decodeURIComponent(e[2]);
       }
-      let hash = hashParams.access_token;
+
+      let hash = await hashParams.access_token;
+
       if (hash) {
-        getToken();
+        await getToken(hash);
       }
     };
     getHashParams();
@@ -31,11 +33,11 @@ function Authentication({ getToken }) {
       <div className='introTitle'>
         Zenify
         <br />
-        <span className='introName'> By Silvanus Designs </span>
+        <span className='introName'>By Silvanus Designs </span>
       </div>
       <img src={logo} alt='Silvanus Designs' className='introLogo' />
-      <a href='http://localhost:8888'>
-        <button className='loginButton'>Spotify Login Required</button>
+      <a href='/login'>
+        <button className='loginButton'>Login - Spotify Premium Required</button>
       </a>
     </div>
   );
@@ -43,6 +45,7 @@ function Authentication({ getToken }) {
 
 const mapStateTopProps = (state) => ({
   token: state.setToken.accessToken,
+  isLoggedIn: state.setToken.isLoggedIn,
 });
 export default connect(mapStateTopProps, { getToken, setToken })(
   Authentication

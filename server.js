@@ -24,12 +24,14 @@ var request = require('request'); // "Request" library
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+const path = require('path');
 
 require('dotenv').config();
 
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
+const PORT = process.env.PORT || 8080;
 
 /**
  * Generates a random string containing numbers and letters
@@ -52,7 +54,7 @@ var stateKey = 'spotify_auth_state';
 var app = express();
 
 app
-  .use(express.static(__dirname + '/public'))
+  .use(express.static(__dirname + 'client/build/'))
   .use(cors())
   .use(cookieParser());
 
@@ -125,7 +127,7 @@ app.get('/callback', function (req, res) {
 
         // we can also pass the token to the browser to make requests from there
         res.redirect(
-          'http://localhost:3000/#' +
+          'https://zenify-server.herokuapp.com/#' +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token,
@@ -169,6 +171,11 @@ app.get('/refresh_token', function (req, res) {
     }
   });
 });
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
-console.log('Listening on 8888');
-app.listen(8888);
+app.listen(PORT);

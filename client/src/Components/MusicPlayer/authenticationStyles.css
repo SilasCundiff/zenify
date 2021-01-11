@@ -1,7 +1,7 @@
 .loginButton {
     position: fixed;
     padding: 10px;
-    border-radius: 5%;
+    border-radius: 1rem;
     margin: 20px 10px 20px 20px;
     background: #1DB954;
     color: #fff;
@@ -10,6 +10,7 @@
     left: 0;
     font-size: 1.5rem;
     z-index: 100;
+    outline: none;
 }
 .introLogo {
     position: fixed;
@@ -43,3 +44,20 @@
 }
 
 
+@media only screen and (max-width: 1280px) {
+    .loginButton {
+        margin: 10px;
+    }
+    .introLogo {
+        width: 180vw;
+    }
+    .introTitle {
+        font-size: 20vw;
+        line-height: 1;
+        text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.9);
+    }
+    .introName {
+        font-size:16vw;
+        text-shadow: 3px 5px 3px rgba(0, 0, 0, 0.9);
+    }
+}

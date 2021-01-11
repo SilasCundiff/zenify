@@ -4,6 +4,7 @@ import { setNowPlaying } from '../../actions/nowPlaying.js';
 import Spotify from 'spotify-web-api-js';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import './searchStyles.css';
+import icon from '../icon.svg';
 import Footer from './Footer';
 const spotifyWebApi = new Spotify();
 function Search({ token, setNowPlaying }) {
@@ -15,9 +16,8 @@ function Search({ token, setNowPlaying }) {
     id: '',
   });
   const [zen, setZen] = useState(false);
-  const [zenPlayer, setZenPlayer] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [playerOpen, setPlayerOpen] = useState(false);
+  const [zenPlayer, setZenPlayer] = useState(true);
+
   //Taken from Spotify web api example and altered to fit my needs
   spotifyWebApi.setAccessToken(token);
   let prev = null;
@@ -48,9 +48,9 @@ function Search({ token, setNowPlaying }) {
         // console.log('returnedTracks', returnedTracks);
         if (returnedTracks.length > 0) {
           setTracks(returnedTracks);
-          setMessage('Enter a Track');
+          setMessage('Enter Track');
         } else {
-          setMessage('No Results Found, please try a different track name');
+          setMessage('No Results Found, try a different track');
         }
       });
   };
@@ -61,7 +61,7 @@ function Search({ token, setNowPlaying }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSearch(e.target.value);
-    setSearchOpen(true);
+
     if (search) {
       await onUserSubmit(search);
     }
@@ -72,12 +72,12 @@ function Search({ token, setNowPlaying }) {
       type: `${type}`,
       id: `${id}`,
     });
-    setPlayerOpen(true);
-    // console.log('selected', selected);
+    setZenPlayer(false);
   };
 
   const getNowPlaying = (state) => {
     setNowPlaying(state);
+    // console.log(state);
   };
   const handleClick = () => {
     setZen(!zen);
@@ -90,40 +90,41 @@ function Search({ token, setNowPlaying }) {
     <div>
       <div className='buttonContainer'>
         <button
-          className={`ZenModePlayer ${zenPlayer ? 'zen' : 'nozen'}`}
+          className={`ZenModePlayer`}
           id='ZenPlayerButton'
           onClick={handleClick2}
         >
-          Zenify Player
+          {`${zenPlayer ? 'Show' : 'Hide'}`} Player
         </button>
-        <button
-          id='ZenButton'
-          className={`ZenMode ${zen ? 'zen' : 'nozen'}`}
-          onClick={handleClick}
-        >
-          Zenify Search
+        <button id='ZenButton' className={`ZenMode`} onClick={handleClick}>
+          {`${zen ? 'Show' : 'Hide'}`} Search
         </button>
       </div>
       <div className={`spotifyBody ${zen ? 'zen' : 'nozen'}`}>
         <div className='Search'>
           <form className='SearchForm show' onSubmit={handleSubmit}>
             <label htmlFor='trackSearch'>{message}</label>
-            <input
-              name='trackSearch'
-              type='text'
-              value={search || ''}
-              onChange={handleChange}
-            />
+            <div className='search-container'>
+              <input
+                name='trackSearch'
+                type='text'
+                value={search || ''}
+                onChange={handleChange}
+              />
+              <button onClick={handleSubmit} className='searchButton'>
+                <i class='fas fa-search'></i>
+              </button>
+            </div>
           </form>
         </div>
-
+        <img src={icon} alt='Silvanus Designs' className='searchLogo' />
         <div className={`searchResultsTable ${tracks ? 'show' : 'hide'}`}>
           <table>
             {tracks ? (
               <thead>
                 <tr>
-                  <th>Album cover</th>
-                  <th>Track Name</th>
+                  <th>Artwork</th>
+                  <th>Track</th>
                   <th>Album</th>
                   <th>Artist</th>
                 </tr>
@@ -135,7 +136,7 @@ function Search({ token, setNowPlaying }) {
                 {tracks.map((track) => {
                   return (
                     <tr key={`${track.type}:${track.id}`}>
-                      <td>
+                      <td className='td-image'>
                         <img
                           className='searchResultAlbumImage'
                           src={track.album.images[2].url}
@@ -143,6 +144,7 @@ function Search({ token, setNowPlaying }) {
                         />
                       </td>
                       <td
+                        className='td-track'
                         onClick={() => {
                           handleSelected(track.type, track.id);
                         }}
@@ -150,6 +152,7 @@ function Search({ token, setNowPlaying }) {
                         {track.name}
                       </td>
                       <td
+                        className='td-album'
                         onClick={() => {
                           handleSelected(track.album.type, track.album.id);
                         }}
@@ -157,6 +160,7 @@ function Search({ token, setNowPlaying }) {
                         {track.album.name}
                       </td>
                       <td
+                        className='td-artist'
                         onClick={() => {
                           handleSelected(
                             track.artists[0].type,
@@ -176,21 +180,24 @@ function Search({ token, setNowPlaying }) {
       </div>
       <div className={`Player ${zenPlayer ? 'zen' : 'nozen'}`}>
         {selected.id ? (
-          <SpotifyPlayer
-            styles={{
-              bgColor: '#191414',
-              color: '#1DB954',
-              loaderColor: '#1DB954',
-              sliderColor: '#1DB954',
-              trackArtistColor: '#1DB954',
-              trackNameColor: '#1DB954',
-            }}
-            token={token}
-            uris={[`spotify:${selected.type}:${selected.id}`]}
-            callback={(state) => {
-              getNowPlaying(state);
-            }}
-          />
+          <div className='player-container'>
+            <SpotifyPlayer
+              styles={{
+                bgColor: '#191414',
+                color: '#1DB954',
+                loaderColor: '#1DB954',
+                sliderColor: '#1DB954',
+                trackArtistColor: '#1DB954',
+                trackNameColor: '#1DB954',
+              }}
+              token={token}
+              uris={[`spotify:${selected.type}:${selected.id}`]}
+              callback={async (state) => {
+                // console.log(await state);
+                getNowPlaying(await state);
+              }}
+            />
+          </div>
         ) : null}
       </div>
       {!zen ? <Footer /> : null}
