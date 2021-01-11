@@ -4,6 +4,11 @@ Zenify is a music player and visualizer using Spotify's API, TSParticles, and va
 
 You can login with your Spotify account, search for a track or album to play, and the particles will react to the music by changing speed, color, and movement direction.
 
+My deployment branch has a lot of commits, It was my first time trying to bug test to a heroku server and my workflow was really bad. I thought I was nearly done when I first deployed it, but I had to make some changes for deployment and it lead to a typo that took me many hours to find. For the sake of time, my commit messages are not very discriptive. I understand that this is bad practice, and I usually have better commit messages, but coming up with commit messages for every minor change was taking to much time in an already bad workflow. 
+
+In the future I will figure out a better workflow and make less small commits and test more changes locally before deployment. Mostly for the sake of my own sanity, as spending 3-4 mins to wait for heroku to build the project between each test was really tedious.
+
+
 Feel free to download the code and alter it or reuse it.
 
 Libraries used:
