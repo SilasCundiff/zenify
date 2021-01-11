@@ -1,5 +1,4 @@
-# This is Zenify //Link will go here once it is deployed and hosted
-
+# This is Zenify https://zenify-server.herokuapp.com/
 Zenify is a music player and visualizer using Spotify's API, TSParticles, and various supporting libraries.
 
 You can login with your Spotify account, search for a track or album to play, and the particles will react to the music by changing speed, color, and movement direction.
@@ -45,7 +44,7 @@ The solution I came up with was to use a Date() object to create timestamps for 
 I want to revisit this in the future, when I know more, to make improvements, and to make my code more efficient. For instance, I don't use many components, and some components are redundant or should be pure JS code instead, but my lack of experience prevents me from efficiently refactoring things into a cleaner structure.
 
 #### Wishlist of features I want to/Will add:
-*Responsiveness
+*~~Responsiveness~~
 *Persistent Sessions and login support/cookies
 *Refresh token support
 *Logout button
